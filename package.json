@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "FitBro Fitness Application",
   "main": "api/index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "start": "node api/index.js",
     "dev": "nodemon api/index.js",
