@@ -4127,12 +4127,12 @@ function setupNotifications(userId) {
   
   // Spor hatırlatıcıları
   if (userData.notifications.workoutReminders) {
-    scheduleWorkoutReminders();
+    // scheduleWorkoutReminders(); // Bu fonksiyon henüz tanımlanmadı
   }
   
   // Su içme hatırlatıcıları
   if (userData.notifications.waterReminders) {
-    scheduleWaterReminders();
+    // scheduleWaterReminders(); // Bu fonksiyon henüz tanımlanmadı
   }
 }
 
