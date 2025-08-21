@@ -108,19 +108,19 @@ function renderSidebarMainMenu() {
   mainMenu.className = 'sidebar-main-menu';
   mainMenu.innerHTML = `
     <h3>⚙️ Ayarlar & Özellikler</h3>
-          <div class="menu-grid">
-        <div class="menu-item" data-panel="ai-planning"><span class="menu-icon">🧬</span><span class="menu-text">AI Planlama</span></div>
+    <div class="menu-grid">
+      <div class="menu-item" data-panel="ai-planning"><span class="menu-icon">🧬</span><span class="menu-text">AI Planlama</span></div>
         <div class="menu-item" data-panel="muscle-selection"><span class="menu-icon">💪</span><span class="menu-text">Kas Grubu Seçimi</span></div>
-        <div class="menu-item" data-panel="schedule"><span class="menu-icon">📅</span><span class="menu-text">Haftalık Program</span></div>
-        <div class="menu-item" data-panel="maskot"><span class="menu-icon">🤖</span><span class="menu-text">Maskot & Mesaj</span></div>
-        <div class="menu-item" data-panel="music"><span class="menu-icon">🎵</span><span class="menu-text">Müzik Modu</span></div>
-        <div class="menu-item" data-panel="pdf-report"><span class="menu-icon">🧾</span><span class="menu-text">PDF Rapor</span></div>
-        <div class="menu-item" data-panel="calendar"><span class="menu-icon">📅</span><span class="menu-text">Takvim Görünümü</span></div>
-        <div class="menu-item" data-panel="statistics"><span class="menu-icon">📈</span><span class="menu-text">İstatistikler</span></div>
-        <div class="menu-item" data-panel="reminders"><span class="menu-icon">🔔</span><span class="menu-text">Hatırlatıcılar</span></div>
-        <div class="menu-item" data-panel="gamification"><span class="menu-icon">🎮</span><span class="menu-text">Oyunlaştırma</span></div>
-        <div class="menu-item" data-panel="community"><span class="menu-icon">🧑‍🤝‍🧑</span><span class="menu-text">Topluluk</span></div>
-        <div class="menu-item" data-panel="premium"><span class="menu-icon">💸</span><span class="menu-text">Premium</span></div>
+      <div class="menu-item" data-panel="schedule"><span class="menu-icon">📅</span><span class="menu-text">Haftalık Program</span></div>
+      <div class="menu-item" data-panel="maskot"><span class="menu-icon">🤖</span><span class="menu-text">Maskot & Mesaj</span></div>
+      <div class="menu-item" data-panel="music"><span class="menu-icon">🎵</span><span class="menu-text">Müzik Modu</span></div>
+      <div class="menu-item" data-panel="pdf-report"><span class="menu-icon">🧾</span><span class="menu-text">PDF Rapor</span></div>
+      <div class="menu-item" data-panel="calendar"><span class="menu-icon">📅</span><span class="menu-text">Takvim Görünümü</span></div>
+      <div class="menu-item" data-panel="statistics"><span class="menu-icon">📈</span><span class="menu-text">İstatistikler</span></div>
+      <div class="menu-item" data-panel="reminders"><span class="menu-icon">🔔</span><span class="menu-text">Hatırlatıcılar</span></div>
+      <div class="menu-item" data-panel="gamification"><span class="menu-icon">🎮</span><span class="menu-text">Oyunlaştırma</span></div>
+      <div class="menu-item" data-panel="community"><span class="menu-icon">🧑‍🤝‍🧑</span><span class="menu-text">Topluluk</span></div>
+      <div class="menu-item" data-panel="premium"><span class="menu-icon">💸</span><span class="menu-text">Premium</span></div>
         
         <!-- Yeni Kategoriler -->
         <div class="menu-item" data-panel="body-tracking"><span class="menu-icon">📏</span><span class="menu-text">Vücut Takibi</span></div>
@@ -130,7 +130,7 @@ function renderSidebarMainMenu() {
         <div class="menu-item" data-panel="leaderboard"><span class="menu-icon">🏆</span><span class="menu-text">Liderlik Tablosu</span></div>
         <div class="menu-item" data-panel="ai-analytics"><span class="menu-icon">🤖</span><span class="menu-text">AI Analiz</span></div>
         <div class="menu-item" data-panel="settings"><span class="menu-icon">⚙️</span><span class="menu-text">Ayarlar</span></div>
-      </div>
+    </div>
   `;
   sidebar.appendChild(mainMenu);
   // Menü seçeneklerine event listener ekle
@@ -190,9 +190,9 @@ function showPanel(panelName) {
     case 'community':
       showCommunityPanel();
       break;
-          case 'premium':
-        showPremiumPanel();
-        break;
+    case 'premium':
+      showPremiumPanel();
+      break;
       case 'body-tracking':
         showBodyTrackingPanel();
         break;
@@ -1470,7 +1470,7 @@ function updateStatisticsFromAiPlan(aiPlan) {
 async function handleLogin(e) {
   e.preventDefault();
   const email = document.getElementById('loginUsername').value.trim();
-  const password = document.getElementById('loginPassword').value;
+    const password = document.getElementById('loginPassword').value;
   const gender = document.querySelector('input[name="loginGender"]:checked').value;
 
   if (!email || !password) {
@@ -1538,8 +1538,8 @@ async function handleRegister(e) {
 
   if (!username || !password) {
     showNotification('⚠️ Kullanıcı adı ve şifre gerekli!');
-    return;
-  }
+        return;
+    }
 
   try {
     showNotification('🔄 Kayıt yapılıyor...');
@@ -1576,7 +1576,7 @@ async function handleRegister(e) {
       saveUserData(user.id, initialData);
     }
     
-    showMainApp(user);
+        showMainApp(user);
     showNotification('✅ Kayıt başarılı! Hoş geldin ' + user.username + '!');
     
     // Yemek listesini ve kaloriyi yükle
@@ -1609,7 +1609,7 @@ if (logoutBtn) {
 
 function handleLogout() {
   // Token ve kullanıcı verilerini temizle
-  localStorage.removeItem('currentUser');
+        localStorage.removeItem('currentUser');
   localStorage.removeItem('authToken');
   authToken = null;
   currentUserData = null;
@@ -2795,7 +2795,7 @@ if (typeof window.showAiPlanningPanel === 'function') {
   const _originalShowAiPlanningPanel = window.showAiPlanningPanel;
   window.showAiPlanningPanel = function() {
     _originalShowAiPlanningPanel();
-    setTimeout(() => {
+setTimeout(() => {
       const form = document.getElementById('ai-plan-form');
       if (form) {
         form.addEventListener('submit', function() {
@@ -3169,8 +3169,8 @@ function startWorkout() {
   
   if (selectedMuscles.length === 0) {
     showNotification('⚠️ En az bir kas grubu seçmelisiniz!');
-    return;
-  }
+      return;
+    }
   
   const user = getCurrentUser();
   const userData = getUserData(user.id);
@@ -3425,8 +3425,8 @@ function startMainPageWorkout() {
   
   if (selectedMuscles.length === 0) {
     showNotification('⚠️ En az bir kas grubu seçmelisiniz!');
-    return;
-  }
+        return;
+      }
   
   const user = getCurrentUser();
   const userData = getUserData(user.id);
