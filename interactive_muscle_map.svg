@@ -1,0 +1,16 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1536" width="300" height="450">
+  <!-- Chest -->
+  <path d="M300,300 L400,300 L400,400 L300,400 Z" fill="#e63946" data-muscle="chest"/>
+  <!-- Biceps -->
+  <path d="M250,400 L270,400 L270,500 L250,500 Z" fill="#a8dadc" data-muscle="biceps-left"/>
+  <path d="M430,400 L450,400 L450,500 L430,500 Z" fill="#a8dadc" data-muscle="biceps-right"/>
+  <!-- Abs -->
+  <path d="M310,410 L390,410 L390,550 L310,550 Z" fill="#f1faee" data-muscle="abs"/>
+  <!-- Quads -->
+  <path d="M320,560 L340,560 L340,700 L320,700 Z" fill="#457b9d" data-muscle="quad-left"/>
+  <path d="M360,560 L380,560 L380,700 L360,700 Z" fill="#457b9d" data-muscle="quad-right"/>
+  <!-- Calves -->
+  <path d="M320,710 L340,710 L340,800 L320,800 Z" fill="#2a9d8f" data-muscle="calf-left"/>
+  <path d="M360,710 L380,710 L380,800 L360,800 Z" fill="#2a9d8f" data-muscle="calf-right"/>
+</svg>

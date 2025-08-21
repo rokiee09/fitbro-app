@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitBro - Fitness Takip Uygulaması</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+       crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="authScreen" class="auth-container">
+        <div class="auth-box">
+      <div class="logo-container">
+        <img src="logo.png" alt="FitPlan Logo" class="app-logo">
+      </div>
+            <form id="loginForm" class="auth-form">
+                <h2>Giriş Yap</h2>
+        <input type="text" id="loginUsername" placeholder="Kullanıcı Adı" required>
+                <input type="password" id="loginPassword" placeholder="Şifre" required>
+        <div class="gender-select">
+          <label><input type="radio" name="loginGender" value="male" checked> Erkek</label>
+          <label><input type="radio" name="loginGender" value="female"> Kadın</label>
+        </div>
+        <button type="submit">Giriş Yap</button>
+                <p class="auth-switch">Hesabın yok mu? <a href="#" id="showRegister">Kayıt Ol</a></p>
+            </form>
+            <form id="registerForm" class="auth-form hidden">
+                <h2>Kayıt Ol</h2>
+                <input type="text" id="registerUsername" placeholder="Kullanıcı Adı" required>
+                <input type="password" id="registerPassword" placeholder="Şifre" required>
+        <div class="gender-select">
+          <label><input type="radio" name="registerGender" value="male" checked> Erkek</label>
+          <label><input type="radio" name="registerGender" value="female"> Kadın</label>
+        </div>
+        <button type="submit">Kayıt Ol</button>
+                <p class="auth-switch">Zaten hesabın var mı? <a href="#" id="showLogin">Giriş Yap</a></p>
+            </form>
+    </div>
+  </div>
+  <div id="mainApp" class="main-container hidden">
+    <div class="main-header">
+      <img src="logo.png" alt="FitPlan Logo" class="main-logo">
+    </div>
+    <button id="logoutBtn" class="logout-btn">Çıkış Yap</button>
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <img src="logo.png" alt="FitBro Logo" class="sidebar-logo-img">
+        </div>
+        <div class="sidebar-user-info">
+          <span id="sidebar-gender-icon"></span>
+          <span id="sidebar-username"></span>
+        </div>
+      </div>
+      <!-- Eski menü ve ana menü kodları kaldırıldı -->
+      <div id="sidebar-content" class="sidebar-content"></div>
+    </div>
+    <button id="hamburger" class="hamburger">☰</button>
+    <div class="container dashboard-grid">
+      <section class="dashboard-card ai-plan-summary-section section">
+        <h2>AI Planı Özeti</h2>
+        <div id="ai-plan-summary" style="margin-top:10px; padding:10px; border:1px solid #ccc;"></div>
+      </section>
+
+      <section class="dashboard-card workout-section section">
+        <h2>📊 Spor Özeti</h2>
+        
+        <!-- Bugünkü Spor Durumu -->
+        <div class="today-workout-status">
+          <div class="status-card">
+            <div class="status-icon">🔥</div>
+            <div class="status-info">
+              <div class="status-value" id="today-calories">0</div>
+              <div class="status-label">Bugün Yakılan Kalori</div>
+            </div>
+          </div>
+          
+          <div class="status-card">
+            <div class="status-icon">⏱️</div>
+            <div class="status-info">
+              <div class="status-value" id="today-duration">0</div>
+              <div class="status-label">Toplam Süre (dk)</div>
+            </div>
+          </div>
+          
+          <div class="status-card">
+            <div class="status-icon">💪</div>
+            <div class="status-info">
+              <div class="status-value" id="today-exercises">0</div>
+              <div class="status-label">Tamamlanan Hareket</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Haftalık İstatistikler -->
+        <div class="weekly-stats">
+          <h3>📈 Bu Hafta</h3>
+          <div class="weekly-grid">
+            <div class="week-day" data-day="pazartesi">
+              <div class="day-name">Pzt</div>
+              <div class="day-calories" id="mon-calories">0</div>
+            </div>
+            <div class="week-day" data-day="sali">
+              <div class="day-name">Sal</div>
+              <div class="day-calories" id="tue-calories">0</div>
+            </div>
+            <div class="week-day" data-day="carsamba">
+              <div class="day-name">Çar</div>
+              <div class="day-calories" id="wed-calories">0</div>
+            </div>
+            <div class="week-day" data-day="persembe">
+              <div class="day-name">Per</div>
+              <div class="day-calories" id="thu-calories">0</div>
+            </div>
+            <div class="week-day" data-day="cuma">
+              <div class="day-name">Cum</div>
+              <div class="day-calories" id="fri-calories">0</div>
+            </div>
+            <div class="week-day" data-day="cumartesi">
+              <div class="day-name">Cmt</div>
+              <div class="day-calories" id="sat-calories">0</div>
+            </div>
+            <div class="week-day" data-day="pazar">
+              <div class="day-name">Paz</div>
+              <div class="day-calories" id="sun-calories">0</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hızlı Erişim Butonları -->
+        <div class="quick-actions">
+          <h3>⚡ Hızlı Erişim</h3>
+          <div class="action-buttons">
+            <button class="action-btn" onclick="showPanel('muscle-selection')">
+              💪 Kas Grubu Seç
+            </button>
+            <button class="action-btn" onclick="showPanel('schedule')">
+              📅 Haftalık Program
+            </button>
+            <button class="action-btn" onclick="showPanel('statistics')">
+              📊 Detaylı İstatistikler
+            </button>
+          </div>
+        </div>
+        
+        <!-- Reklam Alanı 1 (Üst) -->
+        <div class="ad-container" id="ad-container-1">
+          <div class="ad-placeholder">
+            <div class="ad-label">📢 Reklam</div>
+            <div class="ad-text">Premium üyelik ile reklamsız deneyim!</div>
+            <button class="upgrade-btn" onclick="showPremiumUpgrade()">Premium'a Geç</button>
+          </div>
+        </div>
+
+        <!-- Son Sporlar -->
+        <div class="recent-workouts">
+          <h3>🕒 Son Sporlar</h3>
+          <div id="recent-workouts-list" class="recent-list">
+            <div class="no-workouts">Henüz spor yapılmamış</div>
+          </div>
+        </div>
+
+        <!-- Reklam Alanı 2 (Alt) -->
+        <div class="ad-container" id="ad-container-2">
+          <div class="ad-placeholder">
+            <div class="ad-label">📢 Reklam</div>
+            <div class="ad-text">Premium üyelik ile reklamsız deneyim!</div>
+            <button class="upgrade-btn" onclick="showPremiumUpgrade()">Premium'a Geç</button>
+          </div>
+        </div>
+      </section>
+      <section class="dashboard-card meal-section section">
+        <h2>Yemek Takibi</h2>
+        
+        <!-- Yemek Giriş Formu -->
+        <div class="meal-input-container">
+          <div class="meal-input-group">
+            <label for="meal-type">Öğün:</label>
+            <select id="meal-type" class="meal-select">
+              <option value="breakfast">Kahvaltı</option>
+              <option value="lunch">Öğle</option>
+              <option value="dinner">Akşam</option>
+              <option value="snack">Ara Öğün</option>
+            </select>
+          </div>
+          
+          <div class="meal-input-group">
+            <label for="meal-name">Yemek Adı:</label>
+            <input type="text" id="meal-name" class="meal-input" placeholder="Yemek adını girin...">
+          </div>
+          
+          <div class="meal-input-group">
+            <label for="meal-calories">Kalori:</label>
+            <input type="number" id="meal-calories" class="meal-input" placeholder="kcal">
+          </div>
+          
+          <button id="add-meal" type="button" class="add-meal-btn">➕ Ekle</button>
+        </div>
+        
+        <!-- Hızlı Ekle Butonları -->
+        <div class="quick-add-section">
+          <h3>Hızlı Ekle</h3>
+          <div class="quick-add-buttons">
+            <button class="quick-add-btn breakfast" data-name="Yumurta" data-calories="70">🥚 Yumurta</button>
+            <button class="quick-add-btn lunch" data-name="Tavuk Göğsü" data-calories="165">🍗 Tavuk Göğsü</button>
+            <button class="quick-add-btn dinner" data-name="Pirinç Pilavı" data-calories="130">🍚 Pirinç Pilavı</button>
+            <button class="quick-add-btn snack" data-name="Elma" data-calories="52">🍎 Elma</button>
+            <button class="quick-add-btn breakfast" data-name="Süt" data-calories="42">🥛 Süt</button>
+            <button class="quick-add-btn lunch" data-name="Salata" data-calories="25">🥗 Salata</button>
+            <button class="quick-add-btn dinner" data-name="Balık" data-calories="120">🐟 Balık</button>
+            <button class="quick-add-btn snack" data-name="Muz" data-calories="89">🍌 Muz</button>
+          </div>
+        </div>
+        
+        <!-- Fotoğraftan Kalori Tahmin -->
+        <div class="photo-calorie-section">
+          <button id="photo-calorie-btn" class="photo-calorie-btn">
+            📸 Fotoğraftan Kalori Tahmin Et
+          </button>
+        </div>
+        
+        <!-- Yemek Listesi ve Toplam Kalori -->
+        <div class="meal-list-section">
+          <h3>Bugünkü Yemekler</h3>
+          <div id="meal-list"></div>
+          <div style="margin-top:16px;font-weight:bold;">
+            Toplam: <span id="total-calories">0</span> kcal
+          </div>
+        </div>
+
+        <!-- Progress bar ve diğer toplam kalori gösteren alanlar -->
+        <div class="calorie-summary">
+          <div class="calorie-info">
+            <span class="calorie-text">Toplam: <span id="total-calories-progress">0</span> kcal</span>
+            <span class="calorie-target"></span>
+          </div>
+          <div class="calorie-progress-container">
+            <div class="calorie-progress-bar">
+              <div id="calorie-progress-fill" class="calorie-progress-fill"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="dashboard-card body-map-section section" style="grid-column: 1 / -1;">
+        <h2>Kas Grubu Seç & Spor Takibi</h2>
+        
+        <!-- AI Plan Bilgisi -->
+        <div id="ai-plan-info" class="ai-plan-info-main" style="display: none;">
+          <div class="ai-plan-badge-main">🤖 AI Planından</div>
+          <div class="ai-plan-details">
+            <span id="ai-plan-goal"></span> • 
+            <span id="ai-plan-experience"></span> • 
+            <span id="ai-plan-duration"></span> dakika
+          </div>
+        </div>
+        
+        <!-- Kas Grubu Seçimi -->
+        <div id="muscle-selection-container">
+          <h3>💪 Kas Gruplarını Seçin</h3>
+          <div class="muscle-grid">
+            <!-- Üst Vücut -->
+            <div class="muscle-category">
+              <h4>🏋️‍♂️ Üst Vücut</h4>
+              <div class="muscle-items">
+                <div class="muscle-item" data-muscle="gogus">
+                  <div class="muscle-icon">
+                    <img src="göğüs kası.png" alt="Göğüs Kasları" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="muscle-info">
+                    <h5>Göğüs Kasları</h5>
+                    <p>Pectoralis Major & Minor</p>
+                  </div>
+                </div>
+                <div class="muscle-item" data-muscle="sirt">
+                  <div class="muscle-icon">
+                    <img src="sırt.png" alt="Sırt Kasları" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="muscle-info">
+                    <h5>Sırt Kasları</h5>
+                    <p>Latissimus Dorsi & Trapezius</p>
+                  </div>
+                </div>
+                <div class="muscle-item" data-muscle="omuz">
+                  <div class="muscle-icon">
+                    <img src="omuz.png" alt="Omuz Kasları" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="muscle-info">
+                    <h5>Omuz Kasları</h5>
+                    <p>Deltoid & Rotator Cuff</p>
+                  </div>
+                </div>
+                <div class="muscle-item" data-muscle="on-kol">
+                  <div class="muscle-icon">
+                    <img src="ön kol kası.png" alt="Ön Kol Kasları" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="muscle-info">
+                    <h5>Ön Kol Kasları</h5>
+                    <p>Biceps & Brachialis</p>
+                  </div>
+                </div>
+                <div class="muscle-item" data-muscle="arka-kol">
+                  <div class="muscle-icon">
+                    <img src="arka kol.png" alt="Arka Kol Kasları" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="muscle-info">
+                    <h5>Arka Kol Kasları</h5>
+                    <p>Triceps & Anconeus</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Alt Vücut -->
+            <div class="muscle-category">
+              <h4>🦵 Alt Vücut</h4>
+              <div class="muscle-items">
+                <div class="muscle-item" data-muscle="bacak">
+                  <div class="muscle-icon">
+                    <img src="bacak  kası.png" alt="Bacak Kasları" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="muscle-info">
+                    <h5>Bacak Kasları</h5>
+                    <p>Quadriceps & Hamstrings</p>
+                  </div>
+                </div>
+                <div class="muscle-item" data-muscle="kalca">
+                  <div class="muscle-icon">
+                    <img src="kalça.png" alt="Kalça Kasları" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="muscle-info">
+                    <h5>Kalça Kasları</h5>
+                    <p>Gluteus Maximus & Medius</p>
+                  </div>
+                </div>
+                <div class="muscle-item" data-muscle="baldir">
+                  <div class="muscle-icon">
+                    <img src="baldır png.png" alt="Baldır Kasları" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="muscle-info">
+                    <h5>Baldır Kasları</h5>
+                    <p>Gastrocnemius & Soleus</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+                        <!-- Karın Bölgesi -->
+            <div class="muscle-category">
+              <h4>🔥 Karın Bölgesi</h4>
+              <div class="muscle-items">
+                <div class="muscle-item" data-muscle="karin">
+                  <div class="muscle-icon">
+                    <img src="karın.png" alt="Karın Kasları" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="muscle-info">
+                    <h5>Karın Kasları</h5>
+                    <p>Rectus Abdominis & Obliques</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Kardiyo -->
+            <div class="muscle-category">
+              <h4>❤️ Kardiyo</h4>
+              <div class="muscle-items">
+                <div class="muscle-item" data-muscle="kardiyo">
+                  <div class="muscle-icon">
+                    <img src="kardiyo .png" alt="Kardiyo Egzersizleri" style="width: 40px; height: 40px; object-fit: contain;">
+                  </div>
+                  <div class="muscle-info">
+                    <h5>Kardiyo Egzersizi</h5>
+                    <p>Kalp & Akciğer Dayanıklılığı</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seçilen Kas Grupları -->
+        <div id="secili-kas" class="secili-kas" style="display: none;">
+          <h4>✅ Seçilen Kas Grupları:</h4>
+          <div class="selected-muscles-tags"></div>
+        </div>
+
+        <div id="selected-muscles-display" class="selected-muscles-display" style="display: none;">
+          <h4>🎯 Seçilen Kas Grupları</h4>
+          <div id="selected-muscles-list" class="selected-muscles-list"></div>
+        </div>
+
+        <!-- Spor Kontrolleri -->
+        <div class="workout-controls-main">
+          <button id="start-workout-main" class="start-workout-btn-main" style="display: none;">
+            🏃‍♂️ Sporu Başlat
+          </button>
+          <button id="stop-workout-main" class="stop-workout-btn-main" style="display: none;">
+            ⏹️ Sporu Bitir
+          </button>
+        </div>
+
+        <!-- Spor İlerlemesi -->
+        <div id="workout-progress-main" class="workout-progress-main" style="display: none;">
+          <h4>📊 Spor İlerlemesi</h4>
+          <div class="progress-stats-main">
+            <div class="progress-item-main">
+              <span class="progress-icon-main">⏱️</span>
+              <span class="progress-value-main" id="workout-time-main">00:00</span>
+              <span class="progress-label-main">Süre</span>
+            </div>
+            <div class="progress-item-main">
+              <span class="progress-icon-main">🔥</span>
+              <span class="progress-value-main" id="burned-calories-main">0</span>
+              <span class="progress-label-main">Kalori</span>
+            </div>
+            <div class="progress-item-main">
+              <span class="progress-icon-main">💪</span>
+              <span class="progress-value-main" id="completed-exercises-main">0</span>
+              <span class="progress-label-main">Hareket</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Önerilen Hareketler -->
+        <div id="exercise-recommendations-main" class="exercise-recommendations-main" style="display: none;">
+          <h4>🎯 Önerilen Hareketler</h4>
+          <div class="exercise-filters">
+            <button class="filter-btn active" data-difficulty="all">Tümü</button>
+            <button class="filter-btn" data-difficulty="beginner">Başlangıç</button>
+            <button class="filter-btn" data-difficulty="intermediate">Orta</button>
+            <button class="filter-btn" data-difficulty="advanced">İleri</button>
+          </div>
+          <div id="recommended-exercises-main" class="exercises-grid"></div>
+        </div>
+
+        <script>
+        // Kas grubu seçim sistemi
+        document.addEventListener('DOMContentLoaded', function() {
+            const muscleItems = document.querySelectorAll('.muscle-item');
+            const seciliKasDiv = document.getElementById('secili-kas');
+            
+            // Seçilen kas gruplarını takip et
+            let selectedMuscles = [];
+            
+            // Kas grubu tıklama event listener'ları
+            muscleItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    const muscleName = item.getAttribute('data-muscle');
+                    
+                    if (selectedMuscles.includes(muscleName)) {
+                        // Kas grubunu kaldır
+                        selectedMuscles = selectedMuscles.filter(m => m !== muscleName);
+                        item.classList.remove('selected');
+                    } else {
+                        // Kas grubunu ekle
+                        selectedMuscles.push(muscleName);
+                        item.classList.add('selected');
+                    }
+                    
+                    updateSelectedMusclesDisplay();
+                });
+            });
+            
+            // Seçilen kas gruplarını göster
+            function updateSelectedMusclesDisplay() {
+                if (selectedMuscles.length > 0) {
+                    seciliKasDiv.innerHTML = '<h4>✅ Seçilen Kas Grupları:</h4><div class="selected-muscles-tags">' +
+                        selectedMuscles.map(muscle => {
+                            const muscleNames = {
+                                'gogus': 'Göğüs Kasları',
+                                'sirt': 'Sırt Kasları',
+                                'omuz': 'Omuz Kasları',
+                                'on-kol': 'Ön Kol Kasları',
+                                'arka-kol': 'Arka Kol Kasları',
+                                'bacak': 'Bacak Kasları',
+                                'kalca': 'Kalça Kasları',
+                                'baldir': 'Baldır Kasları',
+                                'karin': 'Karın Kasları',
+                                'kardiyo': 'Kardiyo Egzersizleri'
+                            };
+                            return '<span class="muscle-tag">' + (muscleNames[muscle] || muscle) + 
+                                   '<button class="remove-btn" onclick="removeMuscle(\'' + muscle + '\')">×</button></span>';
+                        }).join('') + '</div>';
+                    seciliKasDiv.style.display = 'block';
+                    seciliKasDiv.classList.add('show');
+                    
+                    // Spor başlat butonunu göster
+                    const startBtn = document.getElementById('start-workout-main');
+                    if (startBtn) {
+                        startBtn.style.display = 'inline-block';
+                        startBtn.textContent = `🏃‍♂️ Sporu Başlat (${selectedMuscles.length} kas grubu)`;
+                    }
+                    
+                    // Önerilen hareketleri güncelle
+                    updateExerciseRecommendations();
+                } else {
+                    seciliKasDiv.style.display = 'none';
+                    seciliKasDiv.classList.remove('show');
+                    const startBtn = document.getElementById('start-workout-main');
+                    if (startBtn) {
+                        startBtn.style.display = 'none';
+                    }
+                    
+                    // Önerilen hareketleri gizle
+                    const recommendationsDiv = document.getElementById('exercise-recommendations-main');
+                    if (recommendationsDiv) {
+                        recommendationsDiv.style.display = 'none';
+                    }
+                }
+            }
+            
+            // Kas grubunu kaldır
+            window.removeMuscle = function(muscleName) {
+                selectedMuscles = selectedMuscles.filter(m => m !== muscleName);
+                
+                // CSS class'ını da kaldır
+                const muscleItem = document.querySelector('[data-muscle="' + muscleName + '"]');
+                if (muscleItem) {
+                    muscleItem.classList.remove('selected');
+                }
+                
+                updateSelectedMusclesDisplay();
+                updateExerciseRecommendations();
+            };
+            
+            // AI plan bilgisini göster
+            function showAiPlanInfo() {
+                const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+                if (user) {
+                    const userData = JSON.parse(localStorage.getItem(`userData_${user.id}`) || '{}');
+                    const aiPlan = userData.aiPlan;
+                    
+                    if (aiPlan) {
+                        const infoDiv = document.getElementById('ai-plan-info');
+                        const goalSpan = document.getElementById('ai-plan-goal');
+                        const experienceSpan = document.getElementById('ai-plan-experience');
+                        const durationSpan = document.getElementById('ai-plan-duration');
+                        
+                        goalSpan.textContent = aiPlan.hedefText;
+                        experienceSpan.textContent = aiPlan.deneyimSeviyesi;
+                        durationSpan.textContent = aiPlan.sporSuresi;
+                        
+                        infoDiv.style.display = 'block';
+                    }
+                }
+            }
+
+            // Önerilen hareketleri güncelle
+            function updateExerciseRecommendations() {
+                if (selectedMuscles.length > 0) {
+                    const exercisesContainer = document.getElementById('recommended-exercises-main');
+                    const recommendationsDiv = document.getElementById('exercise-recommendations-main');
+                    
+                    if (exercisesContainer && recommendationsDiv) {
+                        exercisesContainer.innerHTML = generateExerciseCards(selectedMuscles);
+                        recommendationsDiv.style.display = 'block';
+                        
+                        // Filtre butonları için event listener'ları ekle
+                        setupExerciseFilters();
+                    }
+                } else {
+                    const recommendationsDiv = document.getElementById('exercise-recommendations-main');
+                    if (recommendationsDiv) {
+                        recommendationsDiv.style.display = 'none';
+                    }
+                }
+            }
+            
+            // Hareket kartlarını oluştur
+            function generateExerciseCards(muscles) {
+                let allExercises = [];
+                
+                muscles.forEach(muscle => {
+                    const exercises = getExercisesForMuscle(muscle);
+                    allExercises = allExercises.concat(exercises);
+                });
+                
+                return allExercises.map(exercise => `
+                    <div class="exercise-card" data-difficulty="${exercise.difficulty}">
+                        <div class="exercise-header">
+                            <h5 class="exercise-title">${exercise.name}</h5>
+                            <span class="exercise-difficulty ${exercise.difficulty}">${getDifficultyText(exercise.difficulty)}</span>
+                        </div>
+                        <div class="exercise-details">
+                            <div class="exercise-detail">
+                                <span class="exercise-detail-icon">⏱️</span>
+                                <span>${exercise.duration} dk</span>
+                            </div>
+                            <div class="exercise-detail">
+                                <span class="exercise-detail-icon">🔥</span>
+                                <span>${exercise.calories} kalori</span>
+                            </div>
+                            <div class="exercise-detail">
+                                <span class="exercise-detail-icon">💪</span>
+                                <span>${exercise.sets} set x ${exercise.reps} tekrar</span>
+                            </div>
+                        </div>
+                        <div class="exercise-description">${exercise.description}</div>
+                                            <div class="exercise-actions">
+                        <button class="exercise-btn primary" id="btn-${exercise.id}" onclick="toggleExercise('${exercise.id}')">Başla</button>
+                        <button class="exercise-btn secondary" onclick="showExerciseDetails('${exercise.id}')">Detay</button>
+                    </div>
+                    <div class="exercise-timer" id="timer-${exercise.id}" style="display: none;">
+                        <span class="timer-text">⏱️ <span id="time-${exercise.id}">00:00</span></span>
+                    </div>
+                    </div>
+                `).join('');
+            }
+            
+            // Kas grubu için hareketleri al
+            function getExercisesForMuscle(muscle) {
+                const exerciseDatabase = {
+                    'gogus': [
+                        {
+                            id: 'pushup',
+                            name: 'Şınav',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 50,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Göğüs, omuz ve kol kaslarını çalıştıran temel egzersiz.'
+                        },
+                        {
+                            id: 'bench-press',
+                            name: 'Bench Press',
+                            difficulty: 'intermediate',
+                            duration: 15,
+                            calories: 80,
+                            sets: 4,
+                            reps: 8,
+                            description: 'Göğüs kaslarını güçlendiren etkili bir egzersiz.'
+                        },
+                        {
+                            id: 'dumbbell-fly',
+                            name: 'Dumbbell Fly',
+                            difficulty: 'advanced',
+                            duration: 12,
+                            calories: 70,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Göğüs kaslarını izole eden gelişmiş egzersiz.'
+                        },
+                        {
+                            id: 'incline-pushup',
+                            name: 'Eğimli Şınav',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 40,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Üst göğüs kaslarını hedefleyen şınav varyasyonu.'
+                        }
+                    ],
+                    'sirt': [
+                        {
+                            id: 'pullup',
+                            name: 'Pull-up',
+                            difficulty: 'intermediate',
+                            duration: 12,
+                            calories: 75,
+                            sets: 3,
+                            reps: 6,
+                            description: 'Sırt kaslarını güçlendiren üst seviye egzersiz.'
+                        },
+                        {
+                            id: 'row',
+                            name: 'Bent Over Row',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 60,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Sırt kaslarını çalıştıran temel egzersiz.'
+                        },
+                        {
+                            id: 'lat-pulldown',
+                            name: 'Lat Pulldown',
+                            difficulty: 'beginner',
+                            duration: 12,
+                            calories: 65,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Geniş sırt kaslarını geliştiren makine egzersizi.'
+                        }
+                    ],
+                    'omuz': [
+                        {
+                            id: 'shoulder-press',
+                            name: 'Shoulder Press',
+                            difficulty: 'intermediate',
+                            duration: 12,
+                            calories: 65,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Omuz kaslarını güçlendiren etkili egzersiz.'
+                        },
+                        {
+                            id: 'lateral-raise',
+                            name: 'Lateral Raise',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 45,
+                            sets: 3,
+                            reps: 15,
+                            description: 'Yan omuz kaslarını çalıştıran izole egzersiz.'
+                        },
+                        {
+                            id: 'front-raise',
+                            name: 'Front Raise',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 40,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Ön omuz kaslarını hedefleyen egzersiz.'
+                        }
+                    ],
+                    'on-kol': [
+                        {
+                            id: 'bicep-curl',
+                            name: 'Bicep Curl',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 40,
+                            sets: 3,
+                            reps: 15,
+                            description: 'Biceps kaslarını çalıştıran temel egzersiz.'
+                        },
+                        {
+                            id: 'hammer-curl',
+                            name: 'Hammer Curl',
+                            difficulty: 'intermediate',
+                            duration: 8,
+                            calories: 45,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Biceps ve ön kol kaslarını çalıştıran egzersiz.'
+                        }
+                    ],
+                    'arka-kol': [
+                        {
+                            id: 'tricep-dip',
+                            name: 'Tricep Dip',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 50,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Triceps kaslarını güçlendiren egzersiz.'
+                        },
+                        {
+                            id: 'tricep-extension',
+                            name: 'Tricep Extension',
+                            difficulty: 'intermediate',
+                            duration: 8,
+                            calories: 45,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Triceps kaslarını izole eden egzersiz.'
+                        },
+                        {
+                            id: 'diamond-pushup',
+                            name: 'Diamond Push-up',
+                            difficulty: 'intermediate',
+                            duration: 12,
+                            calories: 60,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Triceps odaklı şınav varyasyonu.'
+                        }
+                    ],
+                    'bacak': [
+                        {
+                            id: 'squat',
+                            name: 'Squat',
+                            difficulty: 'beginner',
+                            duration: 15,
+                            calories: 90,
+                            sets: 3,
+                            reps: 15,
+                            description: 'Bacak kaslarını güçlendiren temel egzersiz.'
+                        },
+                        {
+                            id: 'lunges',
+                            name: 'Lunges',
+                            difficulty: 'beginner',
+                            duration: 12,
+                            calories: 70,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Bacak kaslarını ve dengeyi geliştiren egzersiz.'
+                        },
+                        {
+                            id: 'calf-raise',
+                            name: 'Calf Raise',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 35,
+                            sets: 3,
+                            reps: 20,
+                            description: 'Baldır kaslarını güçlendiren egzersiz.'
+                        }
+                    ],
+                    'kalca': [
+                        {
+                            id: 'glute-bridge',
+                            name: 'Glute Bridge',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 55,
+                            sets: 3,
+                            reps: 15,
+                            description: 'Kalça kaslarını çalıştıran temel egzersiz.'
+                        },
+                        {
+                            id: 'hip-thrust',
+                            name: 'Hip Thrust',
+                            difficulty: 'intermediate',
+                            duration: 12,
+                            calories: 70,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Kalça kaslarını güçlendiren etkili egzersiz.'
+                        },
+                        {
+                            id: 'fire-hydrant',
+                            name: 'Fire Hydrant',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 40,
+                            sets: 3,
+                            reps: 15,
+                            description: 'Yan kalça kaslarını çalıştıran egzersiz.'
+                        }
+                    ],
+                    'baldir': [
+                        {
+                            id: 'standing-calf-raise',
+                            name: 'Standing Calf Raise',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 35,
+                            sets: 3,
+                            reps: 20,
+                            description: 'Baldır kaslarını güçlendiren temel egzersiz.'
+                        },
+                        {
+                            id: 'seated-calf-raise',
+                            name: 'Seated Calf Raise',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 30,
+                            sets: 3,
+                            reps: 25,
+                            description: 'Oturarak yapılan baldır egzersizi.'
+                        }
+                    ],
+                    'karin': [
+                        {
+                            id: 'crunch',
+                            name: 'Crunch',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 35,
+                            sets: 3,
+                            reps: 20,
+                            description: 'Karın kaslarını çalıştıran temel egzersiz.'
+                        },
+                        {
+                            id: 'plank',
+                            name: 'Plank',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 45,
+                            sets: 3,
+                            reps: '30 saniye',
+                            description: 'Karın ve core kaslarını güçlendiren statik egzersiz.'
+                        }
+                    ],
+                    'kardiyo': [
+                        {
+                            id: 'walking',
+                            name: 'Yürüyüş',
+                            difficulty: 'beginner',
+                            duration: 30,
+                            calories: 150,
+                            sets: 1,
+                            reps: '30 dakika',
+                            description: 'Tempolu yürüyüş, kalp sağlığı için ideal kardiyo.'
+                        },
+                        {
+                            id: 'jumping-jacks',
+                            name: 'Jumping Jacks',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 50,
+                            sets: 3,
+                            reps: 20,
+                            description: 'Klasik jumping jack, kardiyo başlangıcı için ideal.'
+                        },
+                        {
+                            id: 'running',
+                            name: 'Koşu',
+                            difficulty: 'intermediate',
+                            duration: 20,
+                            calories: 200,
+                            sets: 1,
+                            reps: '20 dakika',
+                            description: 'Tempolu koşu, dayanıklılık ve kardiyo geliştirir.'
+                        },
+                        {
+                            id: 'burpees',
+                            name: 'Burpees',
+                            difficulty: 'advanced',
+                            duration: 15,
+                            calories: 120,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Tam vücut kardiyo, güç ve kardiyo kombinasyonu.'
+                        }
+                    ]
+                };
+                
+                return exerciseDatabase[muscle] || [];
+            }
+            
+            // Zorluk seviyesi metnini al
+            function getDifficultyText(difficulty) {
+                const difficultyTexts = {
+                    'beginner': 'Başlangıç',
+                    'intermediate': 'Orta',
+                    'advanced': 'İleri'
+                };
+                return difficultyTexts[difficulty] || difficulty;
+            }
+            
+            // Filtre butonları için event listener'ları
+            function setupExerciseFilters() {
+                const filterBtns = document.querySelectorAll('.filter-btn');
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // Aktif butonu güncelle
+                        filterBtns.forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Filtreleme yap
+                        const difficulty = this.getAttribute('data-difficulty');
+                        filterExercises(difficulty);
+                    });
+                });
+            }
+            
+            // Hareketleri filtrele
+            function filterExercises(difficulty) {
+                const exerciseCards = document.querySelectorAll('.exercise-card');
+                exerciseCards.forEach(card => {
+                    if (difficulty === 'all' || card.getAttribute('data-difficulty') === difficulty) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Egzersiz başlat/bitir toggle
+            window.toggleExercise = function(exerciseId) {
+                const btn = document.getElementById(`btn-${exerciseId}`);
+                const timer = document.getElementById(`timer-${exerciseId}`);
+                const timeDisplay = document.getElementById(`time-${exerciseId}`);
+                
+                if (btn.textContent === 'Başla') {
+                    // Egzersizi başlat
+                    btn.textContent = 'Bitiş';
+                    btn.className = 'exercise-btn danger';
+                    timer.style.display = 'block';
+                    
+                    // Timer başlat
+                    startExerciseTimer(exerciseId);
+                } else {
+                    // Egzersizi bitir
+                    btn.textContent = 'Başla';
+                    btn.className = 'exercise-btn primary';
+                    timer.style.display = 'none';
+                    
+                    // Timer durdur
+                    stopExerciseTimer(exerciseId);
+                }
+            };
+            
+            // Timer değişkenleri
+            const exerciseTimers = {};
+            
+            // Egzersiz timer'ını başlat
+            function startExerciseTimer(exerciseId) {
+                if (exerciseTimers[exerciseId]) {
+                    clearInterval(exerciseTimers[exerciseId]);
+                }
+                
+                let seconds = 0;
+                const timeDisplay = document.getElementById(`time-${exerciseId}`);
+                
+                exerciseTimers[exerciseId] = setInterval(() => {
+                    seconds++;
+                    const minutes = Math.floor(seconds / 60);
+                    const remainingSeconds = seconds % 60;
+                    timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+            
+            // Egzersiz timer'ını durdur
+            function stopExerciseTimer(exerciseId) {
+                if (exerciseTimers[exerciseId]) {
+                    clearInterval(exerciseTimers[exerciseId]);
+                    delete exerciseTimers[exerciseId];
+                }
+            }
+            
+            // Hareket detaylarını göster (basit alert)
+            window.showExerciseDetails = function(exerciseId) {
+                const exercise = findExerciseById(exerciseId);
+                const detailedInfo = getExerciseDetails(exerciseId);
+                
+                if (!exercise || !detailedInfo) {
+                    console.log('Egzersiz bulunamadı:', exerciseId);
+                    return;
+                }
+                
+                // Basit bir alert ile detayları göster
+                const details = `🏋️ ${detailedInfo.name}
+
+📝 NASIL YAPILIR:
+${detailedInfo.steps.join('\n')}
+
+💡 İPUÇLARI:
+${detailedInfo.tips.join('\n')}
+
+⏱️ Süre: ${exercise.duration} dakika
+🔥 Kalori: ${exercise.calories} kalori
+📊 Seviye: ${getDifficultyText(exercise.difficulty)}
+🔢 Set x Tekrar: ${exercise.sets} x ${exercise.reps}`;
+                
+                alert(details);
+            };
+            
+            // Egzersiz ID'sine göre egzersiz bul
+            function findExerciseById(exerciseId) {
+                // exerciseDatabase fonksiyonu içinde tanımlı, burada manuel tanımlayalım
+                const exerciseDatabase = {
+                    'gogus': [
+                        {
+                            id: 'pushup',
+                            name: 'Şınav',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 50,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Göğüs, omuz ve kol kaslarını çalıştıran temel egzersiz.'
+                        },
+                        {
+                            id: 'bench-press',
+                            name: 'Bench Press',
+                            difficulty: 'intermediate',
+                            duration: 15,
+                            calories: 80,
+                            sets: 4,
+                            reps: 8,
+                            description: 'Göğüs kaslarını güçlendiren etkili bir egzersiz.'
+                        },
+                        {
+                            id: 'dumbbell-fly',
+                            name: 'Dumbbell Fly',
+                            difficulty: 'advanced',
+                            duration: 12,
+                            calories: 70,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Göğüs kaslarını izole eden gelişmiş egzersiz.'
+                        },
+                        {
+                            id: 'incline-pushup',
+                            name: 'Eğimli Şınav',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 40,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Üst göğüs kaslarını hedefleyen şınav varyasyonu.'
+                        }
+                    ],
+                    'sirt': [
+                        {
+                            id: 'pullup',
+                            name: 'Pull-up',
+                            difficulty: 'intermediate',
+                            duration: 12,
+                            calories: 75,
+                            sets: 3,
+                            reps: 6,
+                            description: 'Sırt kaslarını güçlendiren üst seviye egzersiz.'
+                        },
+                        {
+                            id: 'row',
+                            name: 'Bent Over Row',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 60,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Sırt kaslarını çalıştıran temel egzersiz.'
+                        },
+                        {
+                            id: 'lat-pulldown',
+                            name: 'Lat Pulldown',
+                            difficulty: 'beginner',
+                            duration: 12,
+                            calories: 65,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Geniş sırt kaslarını geliştiren makine egzersizi.'
+                        }
+                    ],
+                    'omuz': [
+                        {
+                            id: 'shoulder-press',
+                            name: 'Shoulder Press',
+                            difficulty: 'intermediate',
+                            duration: 12,
+                            calories: 65,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Omuz kaslarını güçlendiren etkili egzersiz.'
+                        },
+                        {
+                            id: 'lateral-raise',
+                            name: 'Lateral Raise',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 45,
+                            sets: 3,
+                            reps: 15,
+                            description: 'Yan omuz kaslarını çalıştıran izole egzersiz.'
+                        },
+                        {
+                            id: 'front-raise',
+                            name: 'Front Raise',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 40,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Ön omuz kaslarını hedefleyen egzersiz.'
+                        }
+                    ],
+                    'on-kol': [
+                        {
+                            id: 'bicep-curl',
+                            name: 'Bicep Curl',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 40,
+                            sets: 3,
+                            reps: 15,
+                            description: 'Biceps kaslarını çalıştıran temel egzersiz.'
+                        },
+                        {
+                            id: 'hammer-curl',
+                            name: 'Hammer Curl',
+                            difficulty: 'intermediate',
+                            duration: 8,
+                            calories: 45,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Biceps ve ön kol kaslarını çalıştıran egzersiz.'
+                        }
+                    ],
+                    'arka-kol': [
+                        {
+                            id: 'tricep-dip',
+                            name: 'Tricep Dip',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 50,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Triceps kaslarını güçlendiren egzersiz.'
+                        },
+                        {
+                            id: 'tricep-extension',
+                            name: 'Tricep Extension',
+                            difficulty: 'intermediate',
+                            duration: 8,
+                            calories: 45,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Triceps kaslarını izole eden egzersiz.'
+                        },
+                        {
+                            id: 'diamond-pushup',
+                            name: 'Diamond Push-up',
+                            difficulty: 'intermediate',
+                            duration: 12,
+                            calories: 60,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Triceps odaklı şınav varyasyonu.'
+                        }
+                    ],
+                    'bacak': [
+                        {
+                            id: 'squat',
+                            name: 'Squat',
+                            difficulty: 'beginner',
+                            duration: 15,
+                            calories: 90,
+                            sets: 3,
+                            reps: 15,
+                            description: 'Bacak kaslarını güçlendiren temel egzersiz.'
+                        },
+                        {
+                            id: 'lunges',
+                            name: 'Lunges',
+                            difficulty: 'beginner',
+                            duration: 12,
+                            calories: 70,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Bacak kaslarını ve dengeyi geliştiren egzersiz.'
+                        },
+                        {
+                            id: 'calf-raise',
+                            name: 'Calf Raise',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 35,
+                            sets: 3,
+                            reps: 20,
+                            description: 'Baldır kaslarını güçlendiren egzersiz.'
+                        }
+                    ],
+                    'kalca': [
+                        {
+                            id: 'glute-bridge',
+                            name: 'Glute Bridge',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 55,
+                            sets: 3,
+                            reps: 15,
+                            description: 'Kalça kaslarını çalıştıran temel egzersiz.'
+                        },
+                        {
+                            id: 'hip-thrust',
+                            name: 'Hip Thrust',
+                            difficulty: 'intermediate',
+                            duration: 12,
+                            calories: 70,
+                            sets: 3,
+                            reps: 12,
+                            description: 'Kalça kaslarını güçlendiren etkili egzersiz.'
+                        },
+                        {
+                            id: 'fire-hydrant',
+                            name: 'Fire Hydrant',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 40,
+                            sets: 3,
+                            reps: 15,
+                            description: 'Yan kalça kaslarını çalıştıran egzersiz.'
+                        }
+                    ],
+                    'baldir': [
+                        {
+                            id: 'standing-calf-raise',
+                            name: 'Standing Calf Raise',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 35,
+                            sets: 3,
+                            reps: 20,
+                            description: 'Baldır kaslarını güçlendiren temel egzersiz.'
+                        },
+                        {
+                            id: 'seated-calf-raise',
+                            name: 'Seated Calf Raise',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 30,
+                            sets: 3,
+                            reps: 25,
+                            description: 'Oturarak yapılan baldır egzersizi.'
+                        }
+                    ],
+                    'karin': [
+                        {
+                            id: 'crunch',
+                            name: 'Crunch',
+                            difficulty: 'beginner',
+                            duration: 8,
+                            calories: 35,
+                            sets: 3,
+                            reps: 20,
+                            description: 'Karın kaslarını çalıştıran temel egzersiz.'
+                        },
+                        {
+                            id: 'plank',
+                            name: 'Plank',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 45,
+                            sets: 3,
+                            reps: '30 saniye',
+                            description: 'Karın ve core kaslarını güçlendiren statik egzersiz.'
+                        }
+                    ],
+                    'kardiyo': [
+                        {
+                            id: 'walking',
+                            name: 'Yürüyüş',
+                            difficulty: 'beginner',
+                            duration: 30,
+                            calories: 150,
+                            sets: 1,
+                            reps: '30 dakika',
+                            description: 'Tempolu yürüyüş, kalp sağlığı için ideal kardiyo.'
+                        },
+                        {
+                            id: 'jumping-jacks',
+                            name: 'Jumping Jacks',
+                            difficulty: 'beginner',
+                            duration: 10,
+                            calories: 50,
+                            sets: 3,
+                            reps: 20,
+                            description: 'Klasik jumping jack, kardiyo başlangıcı için ideal.'
+                        },
+                        {
+                            id: 'running',
+                            name: 'Koşu',
+                            difficulty: 'intermediate',
+                            duration: 20,
+                            calories: 200,
+                            sets: 1,
+                            reps: '20 dakika',
+                            description: 'Tempolu koşu, dayanıklılık ve kardiyo geliştirir.'
+                        },
+                        {
+                            id: 'burpees',
+                            name: 'Burpees',
+                            difficulty: 'advanced',
+                            duration: 15,
+                            calories: 120,
+                            sets: 3,
+                            reps: 10,
+                            description: 'Tam vücut kardiyo, güç ve kardiyo kombinasyonu.'
+                        }
+                    ]
+                };
+                
+                const allMuscles = Object.keys(exerciseDatabase);
+                for (let muscle of allMuscles) {
+                    const exercises = exerciseDatabase[muscle];
+                    const found = exercises.find(ex => ex.id === exerciseId);
+                    if (found) return found;
+                }
+                return null;
+            }
+            
+            // Modal'ı kapat
+            window.closeExerciseModal = function() {
+                document.getElementById('exercise-detail-modal').style.display = 'none';
+                window.currentExerciseId = null;
+            };
+            
+            // Modal'dan egzersize başla
+            window.startExerciseFromModal = function() {
+                if (window.currentExerciseId) {
+                    startExercise(window.currentExerciseId);
+                    closeExerciseModal();
+                }
+            };
+            
+            // Egzersiz detaylarını getir
+            function getExerciseDetails(exerciseId) {
+                const detailedDatabase = {
+                    // GÖĞÜS EGZERSİZLERİ
+                    'pushup': {
+                        name: 'Şınav',
+                        steps: [
+                            '1. Yüzüstü yatış pozisyonuna geç, eller omuz genişliğinde yere yerleştir',
+                            '2. Ayak parmakları üzerinde dur, vücut düz bir çizgi oluştursun',
+                            '3. Kolları bükerek vücudunu yere doğru indir',
+                            '4. Göğüs yere yaklaştığında kolları iterek başlangıç pozisyonuna dön'
+                        ],
+                        tips: [
+                            'Karın kaslarını sıkı tut, kalça düşmesin',
+                            'Nefes verirken aşağı in, nefes alırken yukarı çık',
+                            'Zorlanıyorsan dizlerin üzerinde yap'
+                        ]
+                    },
+                    'bench-press': {
+                        name: 'Bench Press',
+                        steps: [
+                            '1. Sırtüstü bench üzerinde yat, ayaklar yerde sabit',
+                            '2. Barbell\'i omuz genişliğinden biraz geniş tut',
+                            '3. Barbell\'i göğsüne kontrollü şekilde indir',
+                            '4. Güçlü bir şekilde yukarı doğru it'
+                        ],
+                        tips: [
+                            'Omuz bıçaklarını sıkıştır, sırt hafif kavisli olsun',
+                            'Ayaklar her zaman yerde sabit kalmalı',
+                            'Mutlaka spotter kullan'
+                        ]
+                    },
+                    'dumbbell-fly': {
+                        name: 'Dumbbell Fly',
+                        steps: [
+                            '1. Bench üzerinde sırtüstü yat, her elde bir dumbbell',
+                            '2. Kolları hafif büklü tutarak yukarı kaldır',
+                            '3. Kolları yanlara doğru kontrollü şekilde aç',
+                            '4. Göğüs kaslarını sıkarak başlangıç pozisyonuna dön'
+                        ],
+                        tips: [
+                            'Kolları tamamen düz tutma, hafif büklü olsun',
+                            'Hareket sadece omuz ekleminden olmalı',
+                            'Ağırlığı fazla artırma, form önemli'
+                        ]
+                    },
+                    'incline-pushup': {
+                        name: 'Eğimli Şınav',
+                        steps: [
+                            '1. Elleri yüksek bir yüzeye (bank, duvar) yerleştir',
+                            '2. Vücut düz bir çizgide, ayaklar yerde',
+                            '3. Kolları bükerek göğsü yüzeye yaklaştır',
+                            '4. Kolları iterek başlangıç pozisyonuna dön'
+                        ],
+                        tips: [
+                            'Yükseklik arttıkça hareket kolaylaşır',
+                            'Üst göğüs kaslarını daha çok çalıştırır',
+                            'Normal şınava hazırlık için ideal'
+                        ]
+                    },
+
+                    // SIRT EGZERSİZLERİ
+                    'pullup': {
+                        name: 'Pull-up',
+                        steps: [
+                            '1. Barı omuz genişliğinde tutarak asıl',
+                            '2. Omuz bıçaklarını aşağı çekerek başla',
+                            '3. Kolları çekerek çeneni barın üzerine çıkar',
+                            '4. Kontrollü şekilde başlangıç pozisyonuna dön'
+                        ],
+                        tips: [
+                            'Sallanma, hareket kontrollü olsun',
+                            'Omuz bıçaklarından hareket başlat',
+                            'Yapamıyorsan assisted pull-up kullan'
+                        ]
+                    },
+                    'row': {
+                        name: 'Bent Over Row',
+                        steps: [
+                            '1. Ayaklar omuz genişliğinde, dizler hafif bükülü',
+                            '2. Kalçadan öne doğru eğil, sırt düz',
+                            '3. Barbell\'i karın bölgesine doğru çek',
+                            '4. Omuz bıçaklarını sıkıştırarak kontrollü indir'
+                        ],
+                        tips: [
+                            'Sırt her zaman düz kalmalı',
+                            'Hareket omuz bıçaklarından başlamalı',
+                            'Ağır kaldırma, form bozulmasın'
+                        ]
+                    },
+                    'lat-pulldown': {
+                        name: 'Lat Pulldown',
+                        steps: [
+                            '1. Lat pulldown makinesine otur, barı omuz genişliğinde tut',
+                            '2. Göğsü öne çıkar, hafif geriye yaslan',
+                            '3. Barı göğsün üst kısmına doğru çek',
+                            '4. Omuz bıçaklarını sıkıştırarak kontrollü bırak'
+                        ],
+                        tips: [
+                            'Momentum kullanma, hareket kontrollü olsun',
+                            'Barı boyun arkasına çekme',
+                            'Omuz bıçaklarını aktif kullan'
+                        ]
+                    },
+
+                    // OMUZ EGZERSİZLERİ
+                    'shoulder-press': {
+                        name: 'Shoulder Press',
+                        steps: [
+                            '1. Ayakta dur, core kaslarını sık',
+                            '2. Dumbbell\'leri omuz hizasında tut',
+                            '3. Kolları yukarı doğru it, başın üzerinde birleştir',
+                            '4. Kontrollü şekilde başlangıç pozisyonuna dön'
+                        ],
+                        tips: [
+                            'Sırt düz, karın kasları sıkı',
+                            'Kolları tamamen düz kilitleme',
+                            'Ağırlık arttıkça oturarak yap'
+                        ]
+                    },
+                    'lateral-raise': {
+                        name: 'Lateral Raise',
+                        steps: [
+                            '1. Ayakta dur, her elde dumbbell',
+                            '2. Kolları hafif büklü tutarak yanlara kaldır',
+                            '3. Omuz hizasına kadar çıkar',
+                            '4. Kontrollü şekilde indir'
+                        ],
+                        tips: [
+                            'Momentum kullanma, yavaş hareket et',
+                            'Omuz hizasından yukarı çıkarma',
+                            'Hafif ağırlıkla başla'
+                        ]
+                    },
+                    'front-raise': {
+                        name: 'Front Raise',
+                        steps: [
+                            '1. Ayakta dur, dumbbell\'leri önde tut',
+                            '2. Kolları hafif büklü tutarak öne kaldır',
+                            '3. Omuz hizasına kadar çıkar',
+                            '4. Kontrollü şekilde indir'
+                        ],
+                        tips: [
+                            'Sırt düz, core aktif',
+                            'Çok ağır ağırlık kullanma',
+                            'Hareket sadece omuz ekleminden'
+                        ]
+                    },
+
+                    // ÖN KOL EGZERSİZLERİ
+                    'bicep-curl': {
+                        name: 'Bicep Curl',
+                        steps: [
+                            '1. Ayakta dur, dumbbell\'leri yanlarda tut',
+                            '2. Dirsekleri sabit tutarak kolları yukarı kıvır',
+                            '3. Biceps\'i sıkarak tam kasıl',
+                            '4. Kontrollü şekilde indir'
+                        ],
+                        tips: [
+                            'Dirsekler vücuda yapışık kalmalı',
+                            'Sallanma, sadece ön kol hareket etsin',
+                            'İnerken de kontrollü ol'
+                        ]
+                    },
+                    'hammer-curl': {
+                        name: 'Hammer Curl',
+                        steps: [
+                            '1. Dumbbell\'leri çekiç tutuşuyla (nötr) tut',
+                            '2. Dirsekleri sabit tutarak yukarı kıvır',
+                            '3. Biceps ve ön kol kaslarını sık',
+                            '4. Kontrollü şekilde indir'
+                        ],
+                        tips: [
+                            'Bilekleri düz tut',
+                            'Ön kol kaslarını da çalıştırır',
+                            'Normal curl\'den daha ağır kaldırabilirsin'
+                        ]
+                    },
+
+                    // ARKA KOL EGZERSİZLERİ
+                    'tricep-dip': {
+                        name: 'Tricep Dip',
+                        steps: [
+                            '1. Paralel barlara asıl veya bank kenarında desteklen',
+                            '2. Kolları bükerek vücudunu aşağı indir',
+                            '3. Dirsekler 90 dereceye gelince dur',
+                            '4. Triceps\'i kullanarak yukarı it'
+                        ],
+                        tips: [
+                            'Vücut düz, öne eğilme',
+                            'Omuzları kulaktan uzak tut',
+                            'Zorlanıyorsan ayaklarını yere değdir'
+                        ]
+                    },
+                    'tricep-extension': {
+                        name: 'Tricep Extension',
+                        steps: [
+                            '1. Sırtüstü yat, dumbbell\'i iki elle tut',
+                            '2. Kolları başın üzerinde düz tut',
+                            '3. Sadece dirseklerden bükerek ağırlığı indir',
+                            '4. Triceps\'i sıkarak başlangıç pozisyonuna dön'
+                        ],
+                        tips: [
+                            'Üst kol sabit kalmalı',
+                            'Dirsekleri dışarı açma',
+                            'Kontrollü hareket, ağırlık düşürme'
+                        ]
+                    },
+                    'diamond-pushup': {
+                        name: 'Diamond Push-up',
+                        steps: [
+                            '1. Şınav pozisyonuna geç, eller elmas şeklinde',
+                            '2. Başparmaklar ve işaret parmakları birleşsin',
+                            '3. Vücudunu aşağı indirirken dirsekler vücuda yakın',
+                            '4. Triceps\'i kullanarak yukarı it'
+                        ],
+                        tips: [
+                            'Normal şınavdan daha zor',
+                            'Dirsekler vücuda yakın kalmalı',
+                            'Yapamıyorsan dizlerin üzerinde yap'
+                        ]
+                    },
+
+                    // BACAK EGZERSİZLERİ
+                    'squat': {
+                        name: 'Squat',
+                        steps: [
+                            '1. Ayaklar omuz genişliğinde, ayak uçları hafif dışa dönük',
+                            '2. Kolları öne uzat, sırt düz',
+                            '3. Kalçanı geriye iterek çömel, dizler ayak uçlarını geçmesin',
+                            '4. Topuklardan iterek kalk'
+                        ],
+                        tips: [
+                            'Dizler ayak uçlarıyla aynı yönde',
+                            'Ağırlık topuklarda olsun',
+                            'Göğüs dik, sırt düz'
+                        ]
+                    },
+                    'lunges': {
+                        name: 'Lunges',
+                        steps: [
+                            '1. Ayakta dur, bir adım öne at',
+                            '2. Her iki dizi de 90 derece büklü olana kadar çömel',
+                            '3. Ön ayaktan iterek başlangıç pozisyonuna dön',
+                            '4. Diğer ayakla tekrarla'
+                        ],
+                        tips: [
+                            'Ön diz ayak ucunu geçmemeli',
+                            'Arka diz yere değmemeli',
+                            'Denge için core kaslarını kullan'
+                        ]
+                    },
+                    'calf-raise': {
+                        name: 'Calf Raise',
+                        steps: [
+                            '1. Ayakta dur, ayak uçları hafif dışa dönük',
+                            '2. Ayak parmaklarının ucuna çık',
+                            '3. Baldır kaslarını sıkarak 2 saniye bekle',
+                            '4. Kontrollü şekilde indir'
+                        ],
+                        tips: [
+                            'Tam hareket aralığı kullan',
+                            'Üstte 2 saniye bekle',
+                            'Ağırlık ekleyerek zorlaştırabilirsin'
+                        ]
+                    },
+
+                    // KALÇA EGZERSİZLERİ
+                    'glute-bridge': {
+                        name: 'Glute Bridge',
+                        steps: [
+                            '1. Sırtüstü yat, dizler bükülü, ayaklar yerde',
+                            '2. Kalçanı yukarı kaldır, vücut düz çizgi oluştursun',
+                            '3. Kalça kaslarını sıkarak 2 saniye bekle',
+                            '4. Kontrollü şekilde indir'
+                        ],
+                        tips: [
+                            'Kalça kaslarını aktif sık',
+                            'Sırt aşırı kavisli olmasın',
+                            'Üstte durakla'
+                        ]
+                    },
+                    'hip-thrust': {
+                        name: 'Hip Thrust',
+                        steps: [
+                            '1. Sırtın bank kenarına yaslan, ayaklar yerde',
+                            '2. Kalçanı yukarı kaldır, diz 90 derece',
+                            '3. Kalça kaslarını sıkarak maksimum kontraksyon',
+                            '4. Kontrollü şekilde indir'
+                        ],
+                        tips: [
+                            'Çene göğse yakın',
+                            'Kalça kaslarını maksimum sık',
+                            'Ağırlık ekleyebilirsin'
+                        ]
+                    },
+                    'fire-hydrant': {
+                        name: 'Fire Hydrant',
+                        steps: [
+                            '1. Dört ayak pozisyonuna geç',
+                            '2. Bir bacağını yana kaldır, diz bükülü kalsın',
+                            '3. Kalça kasını sıkarak maksimum yüksekliğe çıkar',
+                            '4. Kontrollü şekilde indir ve tekrarla'
+                        ],
+                        tips: [
+                            'Core kaslarını sık, dengeyi koru',
+                            'Kalça kaslarını hisset',
+                            'Her iki tarafı eşit çalıştır'
+                        ]
+                    },
+
+                    // BALDIR EGZERSİZLERİ
+                    'standing-calf-raise': {
+                        name: 'Standing Calf Raise',
+                        steps: [
+                            '1. Ayakta dur, ayaklar omuz genişliğinde',
+                            '2. Ayak parmaklarının ucuna çık',
+                            '3. Baldır kaslarını maksimum sık',
+                            '4. Kontrollü şekilde indir'
+                        ],
+                        tips: [
+                            'Tam hareket aralığı kullan',
+                            'Üstte durakla',
+                            'Ağırlık ekleyebilirsin'
+                        ]
+                    },
+                    'seated-calf-raise': {
+                        name: 'Seated Calf Raise',
+                        steps: [
+                            '1. Otur, ayak uçları yüksek platforma koy',
+                            '2. Dizlerin üzerine ağırlık koy',
+                            '3. Ayak parmaklarından iterek kaldır',
+                            '4. Kontrollü şekilde indir'
+                        ],
+                        tips: [
+                            'Soleus kasını daha çok çalıştırır',
+                            'Ağırlığı dizlerin üzerine eşit dağıt',
+                            'Yavaş ve kontrollü hareket'
+                        ]
+                    },
+
+                    // KARIN EGZERSİZLERİ
+                    'crunch': {
+                        name: 'Crunch',
+                        steps: [
+                            '1. Sırtüstü yat, dizler bükülü, eller başın arkasında',
+                            '2. Karın kaslarını sıkarak omuzları yerden kaldır',
+                            '3. Maksimum kontraksyonda 1 saniye bekle',
+                            '4. Kontrollü şekilde indir'
+                        ],
+                        tips: [
+                            'Boynu çekme, karın kaslarını kullan',
+                            'Tam hareket gerekmez, kasılma önemli',
+                            'Nefes verirken yukarı çık'
+                        ]
+                    },
+                    'plank': {
+                        name: 'Plank',
+                        steps: [
+                            '1. Yüzüstü pozisyonuna geç, dirsekler omuz altında',
+                            '2. Ayak parmaklarında dur, vücut düz çizgi',
+                            '3. Karın kaslarını sık, pozisyonu koru',
+                            '4. Belirlenen süre boyunca bekle'
+                        ],
+                        tips: [
+                            'Kalça düşmesin, yükselmesin',
+                            'Nefes almayı unutma',
+                            'Süreyi kademeli artır'
+                        ]
+                    },
+
+                    // KARDİYO EGZERSİZLERİ
+                    'walking': {
+                        name: 'Yürüyüş',
+                        steps: [
+                            '1. Dik duruş, omuzlar gevşek',
+                            '2. Doğal adım uzunluğu kullan',
+                            '3. Kolları doğal şekilde salla',
+                            '4. Tempolu ve düzenli nefes al'
+                        ],
+                        tips: [
+                            'İyi ayakkabı kullan',
+                            'Tempoyu kademeli artır',
+                            'Su içmeyi unutma'
+                        ]
+                    },
+                    'jumping-jacks': {
+                        name: 'Jumping Jacks',
+                        steps: [
+                            '1. Ayaklar bitişik, kollar yanlarda',
+                            '2. Zıplayarak ayakları aç, kolları başın üzerine kaldır',
+                            '3. Tekrar zıplayarak başlangıç pozisyonuna dön',
+                            '4. Ritimli şekilde tekrarla'
+                        ],
+                        tips: [
+                            'Yumuşak zemin tercih et',
+                            'Ayak parmaklarından zıpla',
+                            'Tempo kademeli artır'
+                        ]
+                    },
+                    'running': {
+                        name: 'Koşu',
+                        steps: [
+                            '1. Dik duruş, hafif öne eğilim',
+                            '2. Ayak orta kısmından yere bas',
+                            '3. Kolları 90 derece büklü tut',
+                            '4. Düzenli ve derin nefes al'
+                        ],
+                        tips: [
+                            'Koşu ayakkabısı kullan',
+                            'Tempoyu yavaş artır',
+                            'Isınma ve soğuma yap'
+                        ]
+                    },
+                    'burpees': {
+                        name: 'Burpees',
+                        steps: [
+                            '1. Ayakta dur, çömelerek elleri yere koy',
+                            '2. Ayakları geriye atarak şınav pozisyonuna geç',
+                            '3. Bir şınav yap (opsiyonel)',
+                            '4. Ayakları çekerek çömelme pozisyonuna dön',
+                            '5. Zıplayarak yukarı çık, kolları havaya kaldır'
+                        ],
+                        tips: [
+                            'Hareket akıcı olsun',
+                            'Kendi temponda yap',
+                            'Çok zorlanıyorsan şınavı atla'
+                        ]
+                    }
+                };
+                
+                return detailedDatabase[exerciseId] || null;
+            }
+
+            // AI plan bilgisini göster
+            showAiPlanInfo();
+        });
+        </script>
+      </section>
+    </div>
+    <!-- Bildirim Sistemi -->
+    <div id="notification-container" class="notification-container"></div>
+    
+    <!-- Egzersiz Detayları Modal -->
+    <div id="exercise-detail-modal" class="exercise-modal" style="display: none;">
+      <div class="exercise-modal-content">
+        <div class="exercise-modal-header">
+          <h3 id="exercise-modal-title">Egzersiz Detayları</h3>
+          <button class="exercise-modal-close" onclick="closeExerciseModal()">&times;</button>
+        </div>
+        <div class="exercise-modal-body">
+          <div class="exercise-info-grid">
+            <div class="exercise-info-item">
+              <span class="info-label">⏱️ Süre:</span>
+              <span id="exercise-duration">-</span>
+            </div>
+            <div class="exercise-info-item">
+              <span class="info-label">🔥 Kalori:</span>
+              <span id="exercise-calories">-</span>
+            </div>
+            <div class="exercise-info-item">
+              <span class="info-label">📊 Seviye:</span>
+              <span id="exercise-difficulty">-</span>
+            </div>
+            <div class="exercise-info-item">
+              <span class="info-label">🔢 Set x Tekrar:</span>
+              <span id="exercise-sets-reps">-</span>
+            </div>
+          </div>
+          <div class="exercise-description">
+            <h4>📝 Nasıl Yapılır?</h4>
+            <div id="exercise-steps"></div>
+          </div>
+          <div class="exercise-tips">
+            <h4>💡 İpuçları</h4>
+            <div id="exercise-tips-content"></div>
+          </div>
+        </div>
+        <div class="exercise-modal-footer">
+          <button class="exercise-btn primary" onclick="startExerciseFromModal()">🏃‍♂️ Egzersize Başla</button>
+          <button class="exercise-btn secondary" onclick="closeExerciseModal()">❌ Kapat</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Hatırlatıcı Ayarları -->
+    <div id="reminder-settings" class="reminder-settings" style="display: none;">
+      <div class="reminder-settings-content">
+        <h3>🔔 Hatırlatıcı Ayarları</h3>
+        <div class="reminder-option">
+          <label>
+            <input type="checkbox" id="exercise-reminder" checked>
+            Spor Hatırlatıcısı
+          </label>
+          <select id="exercise-time">
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00" selected>10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+          </select>
+        </div>
+        <div class="reminder-option">
+          <label>
+            <input type="checkbox" id="meal-reminder" checked>
+            Yemek Hatırlatıcısı
+          </label>
+          <select id="meal-check-time">
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00" selected>16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <div class="reminder-option">
+          <label>
+            <input type="checkbox" id="water-reminder" checked>
+            Su İçme Hatırlatıcısı
+          </label>
+          <select id="water-interval">
+            <option value="60">Her 1 saat</option>
+            <option value="90">Her 1.5 saat</option>
+            <option value="120" selected>Her 2 saat</option>
+            <option value="180">Her 3 saat</option>
+          </select>
+        </div>
+        <div class="reminder-option">
+          <label>
+            <input type="checkbox" id="sleep-reminder" checked>
+            Uyku Hatırlatıcısı
+          </label>
+          <select id="sleep-time">
+            <option value="22:00">22:00</option>
+            <option value="22:30">22:30</option>
+            <option value="23:00" selected>23:00</option>
+            <option value="23:30">23:30</option>
+            <option value="00:00">00:00</option>
+          </select>
+        </div>
+        <button id="save-reminders" class="save-reminders-btn">💾 Ayarları Kaydet</button>
+        <button id="test-notification" class="test-notification-btn">🔔 Test Bildirimi</button>
+                </div>
+                </div>
+            </div>
+  <div id="progress-section" class="progress-section hidden">
+    <h2>Haftalık İlerleme</h2>
+    <div id="goal-setup" class="goal-setup">
+      <label for="weekly-goal">Haftalık Spor Hedefin:</label>
+      <select id="weekly-goal">
+        <option value="3">Haftada 3 gün</option>
+        <option value="4">Haftada 4 gün</option>
+        <option value="5">Haftada 5 gün</option>
+        <option value="6">Haftada 6 gün</option>
+        <option value="7">Her gün</option>
+      </select>
+    </div>
+    <div id="streak-bar" class="streak-bar"></div>
+    <div id="progress-chart"></div>
+    <div id="progress-summary"></div>
+    <button id="close-progress" class="close-progress">Kapat</button>
+  </div>
+  <!-- Oyunlaştırma Sistemi -->
+  <div id="gamification-container" class="gamification-container" style="display: none;">
+    <div class="gamification-content">
+      <div class="gamification-header">
+        <h2>🎮 Oyunlaştırma Merkezi</h2>
+        <button class="close-gamification">×</button>
+      </div>
+      
+      <div class="gamification-stats">
+        <div class="level-info">
+          <div class="level-badge">
+            <span class="level-number" id="current-level">1</span>
+            <span class="level-text">Seviye</span>
+          </div>
+          <div class="xp-info">
+            <div class="xp-bar">
+              <div class="xp-progress" id="xp-progress"></div>
+            </div>
+            <span class="xp-text" id="xp-text">0 / 100 XP</span>
+          </div>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-icon">🏆</span>
+            <span class="stat-label">Üst Üste Gün</span>
+            <span class="stat-value" id="streak-days">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon">🏆</span>
+            <span class="stat-label">Toplam Rozet</span>
+            <span class="stat-value" id="total-badges">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon">⭐</span>
+            <span class="stat-label">Toplam XP</span>
+            <span class="stat-value" id="total-xp">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-icon">🎯</span>
+            <span class="stat-label">Başarı Oranı</span>
+            <span class="stat-value" id="success-rate">0%</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="gamification-tabs">
+        <button class="tab-btn active" data-tab="badges">🏅 Rozetler</button>
+        <button class="tab-btn" data-tab="achievements">🎯 Başarımlar</button>
+        <button class="tab-btn" data-tab="leaderboard">🏆 Sıralama</button>
+      </div>
+      
+      <div class="tab-content">
+        <!-- Rozetler Tab -->
+        <div id="badges-tab" class="tab-panel active">
+          <div class="badges-grid" id="badges-grid">
+            <!-- Rozetler buraya gelecek -->
+          </div>
+                </div>
+                
+        <!-- Başarımlar Tab -->
+        <div id="achievements-tab" class="tab-panel">
+          <div class="achievements-list" id="achievements-list">
+            <!-- Başarımlar buraya gelecek -->
+                    </div>
+                </div>
+        
+        <!-- Sıralama Tab -->
+        <div id="leaderboard-tab" class="tab-panel">
+          <div class="leaderboard-content">
+            <h3>🏆 Haftalık Sıralama</h3>
+            <div class="leaderboard-list" id="leaderboard-list">
+              <!-- Sıralama buraya gelecek -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html> 

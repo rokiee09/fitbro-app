@@ -1,0 +1,7428 @@
+/* Reset ve Temel Stiller */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+  font-family: 'Poppins', 'Montserrat', Arial, sans-serif;
+}
+
+/* ===== ANA CONTAINER STİLLERİ ===== */
+
+.container {
+  max-width: 1200px;
+  margin: 80px auto 20px auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 70px auto 20px auto;
+    padding: 0 16px;
+    gap: 20px;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 60px auto 20px auto;
+    padding: 0 12px;
+    gap: 16px;
+  }
+}
+.section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) forwards;
+}
+.section:nth-child(2) { animation-delay: 0.1s; }
+.section:nth-child(3) { animation-delay: 0.2s; }
+.section:nth-child(4) { animation-delay: 0.3s; }
+.section:nth-child(5) { animation-delay: 0.4s; }
+.section:nth-child(6) { animation-delay: 0.5s; }
+.section:nth-child(7) { animation-delay: 0.6s; }
+.section:nth-child(8) { animation-delay: 0.7s; }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: none; }
+}
+header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+header h1 {
+  margin: 0 0 8px 0;
+  font-size: 2rem;
+  color: #2e7d32;
+}
+.daily-goal, .workout-section, .meal-section {
+  background: #fafbfc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+#goal-summary {
+  font-weight: bold;
+  color: #388e3c;
+  margin-top: 8px;
+}
+#workout-list, #meal-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+#workout-list li, #meal-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#workout-list li:last-child, #meal-list li:last-child {
+  border-bottom: none;
+}
+button, .btn, .speak-btn, .logout-btn, .auto-schedule, #add-meal, .quick-meal, .playlist-btn {
+  background: linear-gradient(90deg, #27ae60 0%, #43e97b 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px rgba(39,174,96,0.08);
+  transition: background 0.2s, transform 0.2s;
+  opacity: 0;
+  transform: scale(0.97);
+  animation: fadeInBtn 0.6s cubic-bezier(.23,1.01,.32,1) forwards;
+  animation-delay: 0.8s;
+}
+@keyframes fadeInBtn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+button:hover, .btn:hover, .speak-btn:hover, .logout-btn:hover, .auto-schedule:hover, #add-meal:hover, .quick-meal:hover, .playlist-btn:hover {
+  background: linear-gradient(90deg, #43e97b 0%, #27ae60 100%);
+  transform: scale(1.05);
+}
+.meal-inputs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.meal-inputs input {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #cfd8dc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+#total-calories {
+  font-weight: bold;
+  color: #d84315;
+  margin-top: 8px;
+}
+/* Gizli Sınıf */
+.hidden {
+    display: none !important;
+}
+
+/* Giriş/Kayıt Ekranı */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f6f8;
+}
+.auth-box {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+}
+.app-title {
+  color: #2e7d32;
+  margin-bottom: 16px;
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.auth-form input {
+  padding: 8px;
+  border: 1px solid #cfd8dc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.auth-form button {
+  background: #43a047;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 0;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+.auth-form button:hover {
+  background: #388e3c;
+}
+.auth-switch {
+  font-size: 0.95rem;
+  color: #555;
+}
+.auth-switch a {
+  color: #2e7d32;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.hidden {
+  display: none !important;
+}
+.logout-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: #d84315;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.logout-btn:hover {
+  background: #b71c1c;
+}
+
+/* Ana Uygulama */
+.main-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.app-header {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+    color: #667eea;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-logout {
+    padding: 8px 16px;
+    background: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Günlük Hedef */
+.daily-goal {
+    margin-bottom: 20px;
+}
+
+.daily-goal h2 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.goal-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.goal-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 0;
+    font-size: 1.1rem;
+}
+
+.goal-icon {
+    font-size: 1.5rem;
+}
+
+/* Spor Takibi */
+.workout-section {
+    margin-bottom: 20px;
+}
+
+.workout-section h2 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.workout-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.workout-list {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.workout-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.workout-item:hover {
+    background-color: #f8f9fa;
+}
+
+.workout-item.completed {
+    background-color: #e8f5e8;
+    color: #28a745;
+}
+
+.workout-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    accent-color: #28a745;
+}
+
+/* Yemek Takibi */
+.meal-section h2 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.meal-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.meal-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.meal-name-input {
+    flex: 2;
+    min-width: 150px;
+}
+
+.meal-calorie-input {
+    flex: 1;
+    min-width: 100px;
+}
+
+.meal-input input {
+    padding: 12px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.meal-input input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.meal-input .btn-primary {
+    padding: 12px 20px;
+    width: auto;
+}
+
+.meal-summary h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.meal-list {
+    list-style: none;
+    margin-bottom: 15px;
+}
+
+.meal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.meal-item:last-child {
+    border-bottom: none;
+}
+
+.meal-name {
+    font-weight: 500;
+}
+
+.meal-calories {
+    color: #667eea;
+    font-weight: bold;
+}
+
+.total-calories {
+    text-align: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    font-size: 1.1rem;
+}
+
+.body-map-section {
+  background: #fafbfc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.body-map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+#body-map {
+  margin-bottom: 8px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.muscle-exercises-box {
+  min-height: 48px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  padding: 10px 14px;
+  font-size: 1rem;
+  color: #2e7d32;
+  text-align: center;
+}
+#body-map rect:hover, #body-map ellipse:hover {
+  opacity: 0.8;
+  stroke: #43a047;
+  stroke-width: 3;
+  transition: 0.2s;
+}
+
+#meal-category {
+  padding: 6px 8px;
+  border: 1px solid #cfd8dc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: #f8fafb;
+}
+.quick-meals {
+  margin: 10px 0 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.98rem;
+}
+.quick-meal {
+  background: #e0f2f1;
+  color: #00695c;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.quick-meal:hover {
+  background: #b2dfdb;
+}
+.category-totals {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.category-total {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.97rem;
+  font-weight: bold;
+  color: #fff;
+}
+.category-total.kahvalti { background: #ffb300; }
+.category-total.ogle { background: #43a047; }
+.category-total.aksam { background: #1976d2; }
+.category-total.ara { background: #8e24aa; }
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .auth-box {
+        padding: 30px 20px;
+    }
+    
+    .app-title {
+        font-size: 2rem;
+    }
+    
+    .main-container {
+        padding: 15px;
+    }
+    
+    .app-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .meal-input {
+        flex-direction: column;
+    }
+    
+    .meal-input input,
+    .meal-input .btn-primary {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 10px;
+    }
+    
+    .auth-box {
+        padding: 25px 15px;
+    }
+    
+    .goal-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+} 
+
+@media (max-width: 500px) {
+  .container {
+    max-width: 100vw;
+    padding: 12px 4px;
+  }
+  header h1 {
+    font-size: 1.5rem;
+  }
+  .daily-goal, .workout-section, .meal-section {
+    padding: 10px;
+  }
+  .body-map-section {
+    padding: 8px;
+  }
+  #body-map {
+    width: 120px;
+    height: 240px;
+  }
+  .muscle-exercises-box {
+    font-size: 0.95rem;
+    padding: 8px 6px;
+  }
+} 
+
+.hamburger {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 1001;
+  background: #43a047;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 8px;
+  margin-left: 8px;
+  box-shadow: 0 2px 8px rgba(67,160,71,0.08);
+}
+
+.sidebar-header {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ===== SIDEBAR STİLLERİ ===== */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100vh;
+  background: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid #e8e8e8;
+  background: #f8f9fa;
+  flex-shrink: 0;
+}
+
+.sidebar-header span {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.sidebar-header #sidebar-gender-icon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+.sidebar-header #sidebar-username {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.sidebar-menu li {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-menu a {
+  display: block;
+  padding: 16px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover {
+  background: #f8f9fa;
+  color: #4CAF50;
+  padding-left: 25px;
+}
+
+.sidebar-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: #fafafa;
+}
+
+.sidebar-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #4CAF50;
+}
+
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 1001;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.hamburger:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+/* Responsive Sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100vw;
+    left: -100vw;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .sidebar-header {
+    padding: 16px;
+  }
+  
+  .sidebar-menu a {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+  
+  .sidebar-content {
+    padding: 16px;
+  }
+  
+  .sidebar-content h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .hamburger {
+    top: 15px;
+    left: 15px;
+    padding: 10px 14px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100vw;
+  }
+  
+  .sidebar-header {
+    padding: 12px 16px;
+  }
+  
+  .sidebar-menu a {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+  
+  .sidebar-content {
+    padding: 12px 16px;
+  }
+  
+  .hamburger {
+    top: 10px;
+    left: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Sidebar içerik alanları için scroll ayarları */
+.sidebar-content {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #4CAF50 #f0f0f0;
+}
+
+.sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: #4CAF50;
+  border-radius: 3px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: #45a049;
+}
+
+.progress-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+#progress-chart {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 24px 18px 12px 18px;
+  min-width: 320px;
+  min-height: 180px;
+  margin-bottom: 12px;
+}
+#progress-summary {
+  background: #f4f6f8;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+  text-align: center;
+}
+.close-progress {
+  background: #d84315;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+.close-progress:hover {
+  background: #b71c1c;
+} 
+
+.goal-setup {
+  background: #f4f6f8;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-bottom: 14px;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#weekly-goal {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #cfd8dc;
+  font-size: 1rem;
+  background: #fff;
+}
+.streak-bar {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+}
+.streak-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  transition: background 0.2s;
+}
+.streak-dot.active { background: #43a047; }
+.streak-dot.missed { background: #d84315; } 
+
+.plan-section {
+  background: #fafbfc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.goal-select-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+#user-goal {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #cfd8dc;
+  font-size: 1rem;
+  background: #fff;
+}
+.today-plan-box {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  padding: 12px 16px;
+  font-size: 1.05rem;
+  color: #2e7d32;
+  min-height: 36px;
+} 
+
+.motivation-section {
+  background: #fafbfc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  text-align: center;
+}
+.maskot-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+#maskot-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #cfd8dc;
+  font-size: 1rem;
+  background: #fff;
+}
+#maskot-emoji {
+  font-size: 2rem;
+}
+.motivation-message {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  padding: 12px 16px;
+  font-size: 1.08rem;
+  color: #1976d2;
+  margin-bottom: 10px;
+  min-height: 36px;
+}
+.speak-btn {
+  background: #43a047;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.speak-btn:hover {
+  background: #388e3c;
+} 
+
+.music-section {
+  background: #fafbfc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  text-align: center;
+}
+.music-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+#music-mode {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #cfd8dc;
+  font-size: 1rem;
+  background: #fff;
+}
+.music-playlists {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.playlist-btn {
+  background: #1db954;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.playlist-btn:hover {
+  background: #168f3e;
+} 
+
+.meal-photo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 8px 0;
+}
+#meal-photo {
+  font-size: 0.98rem;
+}
+#photo-predict {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#photo-predict:hover {
+  background: #0d47a1;
+}
+.photo-prediction {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  padding: 10px 14px;
+  font-size: 1.02rem;
+  color: #d84315;
+  margin-bottom: 8px;
+  min-height: 24px;
+} 
+
+.schedule-section {
+  background: #fafbfc;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.auto-schedule {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: background 0.2s;
+}
+.auto-schedule:hover {
+  background: #0d47a1;
+}
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.schedule-table th, .schedule-table td {
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+.schedule-table th {
+  background: #f4f6f8;
+  font-weight: bold;
+}
+.schedule-table tr:last-child td {
+  border-bottom: none;
+}
+.schedule-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #cfd8dc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: #f8fafb;
+} 
+
+@media (max-width: 700px) {
+  .container {
+    max-width: 100vw;
+    padding: 0 2vw;
+  }
+  .section {
+    padding: 12px 4px;
+    margin-bottom: 14px;
+  }
+  #body-image {
+    width: 98vw !important;
+    max-width: 340px !important;
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+  }
+  .body-map-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .schedule-table th, .schedule-table td {
+    padding: 6px 4px;
+    font-size: 0.97rem;
+  }
+  .meal-inputs, .quick-meals, .maskot-row, .music-row {
+    flex-direction: column;
+    gap: 6px;
+    align-items: stretch;
+  }
+} 
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  display: inline-block;
+  margin-left: 6px;
+}
+.badge-success {
+  background: #27ae60;
+  color: white;
+}
+.spotify-btn img, .playlist-btn img {
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.speak-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.progressbar {
+  width: 100%;
+  height: 16px;
+  background: #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 8px 0 12px 0;
+}
+.progressbar-inner {
+  height: 100%;
+  background: linear-gradient(90deg, #27ae60 0%, #43e97b 100%);
+  border-radius: 8px;
+  transition: width 0.4s;
+} 
+
+.muscle-popup {
+  position: fixed;
+  left: 55vw;
+  top: 18vh;
+  min-width: 220px;
+  max-width: 90vw;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(39,174,96,0.13), 0 1.5px 8px rgba(0,0,0,0.07);
+  padding: 18px 18px 12px 18px;
+  z-index: 200;
+  font-size: 1.01rem;
+  color: #222;
+  display: none;
+  animation: fadeInPop .3s;
+}
+@keyframes fadeInPop {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 700px) {
+  .muscle-popup {
+    left: 50% !important;
+    top: 10vh !important;
+    transform: translateX(-50%);
+    min-width: 90vw;
+    max-width: 98vw;
+    font-size: 0.98rem;
+    padding: 12px 6px 8px 10px;
+  }
+} 
+
+.music-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.edit-btn, .add-btn, .delete-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.edit-btn {
+  background: #4CAF50;
+  color: white;
+}
+
+.add-btn {
+  background: #2196F3;
+  color: white;
+}
+
+.delete-btn {
+  background: #f44336;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+}
+
+.add-btn:hover {
+  background: #1976D2;
+  transform: translateY(-2px);
+}
+
+.delete-btn:hover {
+  background: #d32f2f;
+  transform: translateY(-2px);
+} 
+
+/* ===== YEMEK TAKİBİ STİLLERİ ===== */
+
+/* Yemek Giriş Formu */
+.meal-input-container {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.meal-input-group {
+  margin-bottom: 16px;
+}
+
+.meal-input-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.meal-select, .meal-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e8e8e8;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.meal-select:focus, .meal-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.add-meal-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.add-meal-btn:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+/* Hızlı Ekle Bölümü */
+.quick-add-section {
+  margin-bottom: 24px;
+}
+
+.quick-add-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.quick-add-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.quick-add-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #f0f0f0;
+  color: #333;
+}
+
+.quick-add-btn.breakfast {
+  background: #FFF3E0;
+  color: #E65100;
+}
+
+.quick-add-btn.lunch {
+  background: #E8F5E8;
+  color: #2E7D32;
+}
+
+.quick-add-btn.dinner {
+  background: #F3E5F5;
+  color: #7B1FA2;
+}
+
+.quick-add-btn.snack {
+  background: #E3F2FD;
+  color: #1565C0;
+}
+
+.quick-add-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Fotoğraftan Kalori Tahmin */
+.photo-calorie-section {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.photo-calorie-btn {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.photo-calorie-btn:hover {
+  background: #1976D2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.4);
+}
+
+/* Yemek Listesi */
+.meal-list-section {
+  margin-bottom: 24px;
+}
+
+.meal-list-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.meal-list {
+  display: grid;
+  gap: 12px;
+}
+
+.meal-item {
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.meal-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.meal-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.meal-emoji {
+  font-size: 20px;
+}
+
+.meal-details h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 4px 0;
+}
+
+.meal-details .meal-category {
+  font-size: 12px;
+  color: #666;
+  background: #f5f5f5;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.meal-calories {
+  font-weight: 600;
+  color: #4CAF50;
+  font-size: 14px;
+}
+
+.delete-meal-btn {
+  background: #ffebee;
+  color: #d32f2f;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.delete-meal-btn:hover {
+  background: #d32f2f;
+  color: white;
+}
+
+/* Kalori Özeti ve Progress Bar */
+.calorie-summary {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.calorie-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.calorie-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
+.calorie-target {
+  font-size: 14px;
+  color: #666;
+}
+
+.calorie-progress-container {
+  margin-top: 12px;
+}
+
+.calorie-progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #f0f0f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.calorie-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+  width: 0%;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  .meal-input-container {
+    padding: 16px;
+  }
+  
+  .quick-add-buttons {
+    gap: 8px;
+  }
+  
+  .quick-add-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .meal-item {
+    padding: 12px;
+  }
+  
+  .calorie-info {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+} 
+
+/* Spotify Playlist Stilleri */
+.playlist-item {
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+}
+
+.playlist-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.playlist-icon {
+  font-size: 24px;
+  width: 40px;
+  text-align: center;
+}
+
+.playlist-info {
+  flex: 1;
+}
+
+.playlist-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 6px 0;
+}
+
+.spotify-link {
+  color: #1DB954;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  background: #f0f9f0;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.spotify-link:hover {
+  background: #1DB954;
+  color: white;
+  text-decoration: none;
+}
+
+/* Haftalık Program Tablosu */
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.schedule-table th,
+.schedule-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.schedule-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.schedule-table td {
+  font-size: 13px;
+  color: #666;
+}
+
+.schedule-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.schedule-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+}
+
+.auto-schedule {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 16px;
+}
+
+.auto-schedule:hover {
+  background: #1976D2;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+} 
+
+/* ===== AI PLANLAMA STİLLERİ ===== */
+
+.ai-form-container {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.ai-input, .ai-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e8e8e8;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.ai-input:focus, .ai-select:focus {
+  outline: none;
+  border-color: #2196F3;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.ai-generate-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.ai-generate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* AI Sonuç Kartları */
+.ai-results {
+  margin-top: 20px;
+}
+
+.ai-result-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.ai-result-card h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.ai-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ai-stat {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #e9ecef;
+}
+
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.stat-value {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2196F3;
+}
+
+.ai-macros, .ai-exercises, .ai-tips {
+  margin-bottom: 20px;
+}
+
+.ai-macros h5, .ai-exercises h5, .ai-tips h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.macro-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+}
+
+.macro-item:last-child {
+  border-bottom: none;
+}
+
+.macro-item span:first-child {
+  color: #333;
+  font-weight: 500;
+}
+
+.macro-item span:last-child {
+  color: #2196F3;
+  font-weight: 600;
+}
+
+.ai-exercises ul, .ai-tips ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ai-exercises li, .ai-tips li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: #555;
+  position: relative;
+  padding-left: 20px;
+}
+
+.ai-exercises li:before {
+  content: '💪';
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
+.ai-tips li:before {
+  content: '💡';
+  position: absolute;
+  left: 0;
+  top: 8px;
+}
+
+.ai-exercises li:last-child, .ai-tips li:last-child {
+  border-bottom: none;
+}
+
+.ai-apply-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.ai-apply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  .ai-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .ai-result-card {
+    padding: 16px;
+  }
+  
+  .ai-stats {
+    margin-bottom: 20px;
+  }
+  
+  .macro-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+} 
+
+/* ===== PDF RAPOR STİLLERİ ===== */
+
+.pdf-report-container {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.report-preview {
+  margin-bottom: 24px;
+}
+
+.report-preview h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+}
+
+.weekly-summary {
+  display: grid;
+  gap: 12px;
+}
+
+.day-summary {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.day-summary.has-exercise {
+  background: #e8f5e8;
+  border-color: #4CAF50;
+}
+
+.day-summary.no-exercise {
+  background: #fff3e0;
+  border-color: #FF9800;
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.day-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.day-date {
+  font-size: 12px;
+  color: #666;
+}
+
+.day-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.exercise-stat, .calorie-stat {
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.exercise-stat {
+  color: #4CAF50;
+}
+
+.calorie-stat {
+  color: #FF9800;
+}
+
+.report-options {
+  margin-bottom: 24px;
+}
+
+.report-options h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+}
+
+.option-group {
+  margin-bottom: 12px;
+}
+
+.option-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.option-group label:hover {
+  background: #f0f0f0;
+}
+
+.option-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #4CAF50;
+}
+
+.generate-pdf-btn {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.generate-pdf-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.generate-pdf-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  .pdf-report-container {
+    padding: 16px;
+  }
+  
+  .day-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .day-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+} 
+
+/* ===== TAKVİM GÖRÜNÜMÜ STİLLERİ ===== */
+
+.calendar-container {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e8e8e8;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-header h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.calendar-nav-btn {
+  background: #f0f0f0;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.calendar-nav-btn:hover {
+  background: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #666;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.legend-color.completed {
+  background: #4CAF50;
+}
+
+.legend-color.missed {
+  background: #f44336;
+}
+
+.legend-color.today {
+  background: #2196F3;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  min-height: 380px;
+}
+
+.calendar-day {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25em;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid #e9ecef;
+  border-radius: 12px;
+  background: #fff;
+  transition: all 0.18s;
+  min-width: 38px;
+  min-height: 38px;
+  max-width: 54px;
+  max-height: 54px;
+  margin: 0 auto;
+}
+
+.calendar-day.done {
+  background: #e8f5e8;
+  color: #2e7d32;
+}
+
+.calendar-day.missed {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.calendar-day.today {
+  background: #e3f2fd;
+  color: #1976d2;
+  border: 2.5px solid #1976d2;
+  box-shadow: 0 0 0 2px #2196f333;
+}
+
+@media (max-width: 600px) {
+  .calendar-grid {
+    gap: 6px;
+    padding: 6px;
+    min-height: 220px;
+  }
+  .calendar-day {
+    font-size: 1em;
+    min-width: 26px;
+    min-height: 26px;
+    max-width: 36px;
+    max-height: 36px;
+    border-radius: 8px;
+  }
+}
+
+.calendar-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #333;
+}
+
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.legend-dot.done {
+  background: #4caf50;
+}
+
+.legend-dot.missed {
+  background: #f44336;
+}
+
+.legend-dot.today {
+  background: #2196f3;
+}
+
+/* İstatistikler */
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stats-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.stat-icon {
+  font-size: 24px;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+.charts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chart-section {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-section h4 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+}
+
+.weight-input {
+  display: flex;
+  gap: 8px;
+}
+
+.weight-input input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.weight-input input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.save-weight-btn {
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-weight-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .menu-item {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 16px;
+  }
+  
+  .menu-icon {
+    font-size: 20px;
+  }
+  
+  .menu-text {
+    font-size: 14px;
+  }
+  
+  .stats-summary {
+    grid-template-columns: 1fr;
+  }
+  
+  .weight-input {
+    flex-direction: column;
+  }
+  
+  .playlist-controls {
+    flex-direction: column;
+  }
+  
+  .calendar-grid {
+    gap: 6px;
+    padding: 6px;
+    min-height: 220px;
+  }
+  
+  .calendar-day {
+    font-size: 1em;
+    min-width: 26px;
+    min-height: 26px;
+    max-width: 36px;
+    max-height: 36px;
+    border-radius: 8px;
+  }
+}
+
+/* Gamification Paneli */
+.gamification-overview, .level-card, .streak-card, .badges-summary {
+  font-family: 'Montserrat', 'Poppins', Arial, sans-serif;
+}
+.level-card {
+  background: linear-gradient(135deg, #ffd700 0%, #fffbe7 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(255,215,0,0.13);
+  padding: 24px 18px;
+  text-align: center;
+  margin-bottom: 18px;
+  position: relative;
+}
+.level-icon {
+  font-size: 2.5em;
+  color: #ffd700;
+  filter: drop-shadow(0 2px 8px #ffe066);
+  animation: starPulse 1.5s infinite alternate;
+}
+@keyframes starPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 2px 8px #ffe066); }
+  100% { transform: scale(1.12); filter: drop-shadow(0 4px 16px #ffd700); }
+}
+.xp-bar-mini, .xp-bar {
+  background: #f3e5ab;
+  border-radius: 8px;
+  height: 16px;
+  margin: 12px 0 8px 0;
+  overflow: hidden;
+  position: relative;
+}
+.xp-progress-mini, .xp-progress {
+  background: linear-gradient(90deg, #ffd700, #ffed4e, #fffbe7);
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.7s cubic-bezier(.23,1.01,.32,1);
+  box-shadow: 0 2px 8px rgba(255,215,0,0.18);
+}
+.xp-text-mini, .xp-text {
+  font-weight: 700;
+  color: #bfa100;
+  font-size: 1.1em;
+  letter-spacing: 0.02em;
+}
+.streak-card {
+  background: linear-gradient(90deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 14px;
+  padding: 16px 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.1em;
+}
+.streak-icon {
+  font-size: 2em;
+  color: #ff9800;
+  filter: drop-shadow(0 2px 8px #ffd180);
+}
+.badges-summary {
+  background: linear-gradient(90deg, #f8bbd0 0%, #fce4ec 100%);
+  border-radius: 14px;
+  padding: 16px 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.1em;
+}
+.badges-icon {
+  font-size: 2em;
+  color: #e91e63;
+  filter: drop-shadow(0 2px 8px #f8bbd0);
+}
+.badge-item {
+  background: #fffbe7;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(255,215,0,0.08);
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.badge-item.unlocked {
+  border-color: #ffd700;
+  background: linear-gradient(135deg, #fffde7 0%, #fffbe7 100%);
+  animation: badgeGlow 1.2s infinite alternate;
+}
+@keyframes badgeGlow {
+  0% { box-shadow: 0 2px 12px #ffe066; }
+  100% { box-shadow: 0 4px 24px #ffd700; }
+}
+.badge-item:hover {
+  transform: scale(1.04) rotate(-1deg);
+  box-shadow: 0 6px 24px #ffd70044;
+  border-color: #ffed4e;
+}
+.badge-icon {
+  font-size: 2.5em;
+  filter: drop-shadow(0 2px 8px #ffe066);
+}
+.badge-status {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #bfa100;
+}
+/* Görevler Paneli */
+.tasks-panel {
+  background: #e3f2fd;
+  border-radius: 16px;
+  padding: 18px 16px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 12px rgba(33,150,243,0.08);
+}
+.task-item {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 12px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.08em;
+  border: 2px solid #bbdefb;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.task-item.completed {
+  border-color: #43a047;
+  background: linear-gradient(90deg, #e8f5e9 0%, #c8e6c9 100%);
+  box-shadow: 0 4px 16px #43a04733;
+}
+.task-icon {
+  font-size: 1.7em;
+  color: #1976d2;
+  filter: drop-shadow(0 2px 8px #bbdefb);
+}
+.task-item.completed .task-icon {
+  color: #43a047;
+  filter: drop-shadow(0 2px 8px #a5d6a7);
+}
+.task-check {
+  font-size: 1.5em;
+  color: #43a047;
+  margin-left: auto;
+}
+/* Konfeti ve kutlama animasyonu için basit stil */
+.confetti {
+  position: fixed;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+/* AI Planlama Paneli Modern Stil */
+.ai-panel-container {
+  max-width: 420px;
+  margin: 32px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 32px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.ai-panel-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2a3a4b;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ai-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ai-form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.ai-form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 12px 10px;
+  box-shadow: 0 1px 4px rgba(79,140,255,0.04);
+}
+
+.ai-form-group label {
+  font-size: 1rem;
+  color: #3a4a5b;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ai-input {
+  padding: 10px 12px;
+  border: 1.5px solid #e0e4ea;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border 0.2s;
+  font-family: inherit;
+}
+
+.ai-input:focus {
+  border-color: #4f8cff;
+  outline: none;
+}
+
+.ai-btn {
+  margin-top: 8px;
+  padding: 12px 0;
+  background: linear-gradient(90deg, #4f8cff 0%, #38c6ff 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(79,140,255,0.10);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ai-btn:hover {
+  background: linear-gradient(90deg, #38c6ff 0%, #4f8cff 100%);
+  box-shadow: 0 4px 16px rgba(79,140,255,0.13);
+}
+
+.ai-plan-result {
+  margin-top: 18px;
+  background: #f0f7ff;
+  border-radius: 10px;
+  padding: 18px 14px;
+  color: #2a3a4b;
+  font-size: 1.08rem;
+  min-height: 40px;
+  box-shadow: 0 2px 8px rgba(79,140,255,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 500;
+  align-items: flex-start;
+}
+
+.ai-plan-result b {
+  color: #4f8cff;
+}
+
+.ai-plan-result .emoji {
+  font-size: 1.3em;
+  vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+  .ai-panel-container {
+    max-width: 98vw;
+    padding: 18px 4vw 18px 4vw;
+  }
+  .ai-panel-title {
+    font-size: 1.15rem;
+  }
+  .ai-btn {
+    font-size: 1rem;
+  }
+  .ai-form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 10px;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  font-size: 1.08em;
+}
+.menu-item:hover {
+  border-color: #667eea;
+  background: #f3f6fd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102,126,234,0.13);
+}
+.menu-icon {
+  font-size: 1.5em;
+}
+.menu-text {
+  font-size: 1em;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.2;
+}
+.sidebar-main-menu h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.18em;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin: 32px 0 32px 0;
+}
+.dashboard-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 28px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 120px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.dashboard-card h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #222;
+}
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin: 18px 0 18px 0;
+  }
+  .dashboard-card {
+    padding: 18px 8vw 18px 8vw;
+    font-size: 1rem;
+  }
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.app-logo {
+  max-width: 120px;
+  height: auto;
+  margin: 0 auto;
+}
+.main-header {
+  text-align: center;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+.main-logo {
+  max-width: 80px;
+  height: auto;
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .app-logo {
+    max-width: 100px;
+  }
+  .main-logo {
+    max-width: 60px;
+  }
+}
+
+/* Müzik Panel Stilleri */
+.music-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  border-left: 4px solid #1DB954;
+  margin-bottom: 20px;
+}
+
+.music-title {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #1DB954;
+}
+
+.music-mode-section {
+  margin-bottom: 24px;
+}
+
+.music-mode-label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 8px;
+  font-size: 0.95em;
+}
+
+.music-mode-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 1em;
+  background: white;
+  color: #333;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.music-mode-select:focus {
+  outline: none;
+  border-color: #1DB954;
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.1);
+}
+
+.music-mode-select:hover {
+  border-color: #1DB954;
+}
+
+.playlist-section {
+  margin-bottom: 24px;
+}
+
+.playlist-title {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 16px 0;
+}
+
+.playlist-list {
+  min-height: 60px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px dashed #dee2e6;
+}
+
+.playlist-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.playlist-btn {
+  flex: 1;
+  min-width: 80px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.playlist-btn-add {
+  background: #8B5CF6;
+  color: white;
+}
+
+.playlist-btn-add:hover {
+  background: #7C3AED;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.playlist-btn-edit {
+  background: #10B981;
+  color: white;
+}
+
+.playlist-btn-edit:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.playlist-btn-delete {
+  background: #EF4444;
+  color: white;
+}
+
+.playlist-btn-delete:hover {
+  background: #DC2626;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Mobil Responsive */
+@media (max-width: 768px) {
+  .music-card {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .music-title {
+    font-size: 1.3em;
+    margin-bottom: 18px;
+  }
+  
+  .playlist-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .playlist-btn {
+    width: 100%;
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .music-card {
+    padding: 16px;
+  }
+  
+  .music-title {
+    font-size: 1.2em;
+  }
+  
+  .music-mode-select {
+    padding: 10px 14px;
+  }
+}
+
+/* Çalma Listesi Öğeleri */
+.playlist-loading {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 20px;
+}
+
+.no-playlists {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+  font-style: italic;
+}
+
+.playlist-item {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.playlist-item:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.playlist-info {
+  flex: 1;
+}
+
+.playlist-name {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+  font-size: 0.95em;
+}
+
+.playlist-description {
+  color: #666;
+  font-size: 0.85em;
+}
+
+.playlist-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.play-btn, .preview-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.play-btn {
+  background: #1DB954;
+  color: white;
+}
+
+.play-btn:hover {
+  background: #1ed760;
+  transform: translateY(-1px);
+}
+
+.preview-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.preview-btn:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+/* Spotify Player Bölümü */
+.spotify-player-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.player-title {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 16px 0;
+}
+
+.spotify-player {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  min-height: 120px;
+}
+
+.player-placeholder {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}
+
+.player-icon {
+  font-size: 2em;
+  margin-bottom: 8px;
+}
+
+.player-placeholder p {
+  margin: 0;
+  font-style: italic;
+}
+
+.spotify-embed {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Çalma Listesi Önizleme Modal */
+.playlist-preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close-modal:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+/* Özel Çalma Listeleri */
+.custom-playlist-item {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.custom-playlist-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+}
+
+.custom-playlist-info .playlist-name {
+  color: white;
+  font-weight: 600;
+}
+
+.custom-playlist-info .playlist-description {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85em;
+}
+
+/* Mobil Responsive Güncellemeler */
+@media (max-width: 768px) {
+  .playlist-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .playlist-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .play-btn, .preview-btn {
+    flex: 1;
+    padding: 10px 12px;
+  }
+  
+  .modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .spotify-player {
+    min-height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .playlist-item {
+    padding: 12px;
+  }
+  
+  .playlist-name {
+    font-size: 0.9em;
+  }
+  
+  .playlist-description {
+    font-size: 0.8em;
+  }
+  
+  .play-btn, .preview-btn {
+    font-size: 0.75em;
+    padding: 8px 10px;
+  }
+  
+  .spotify-player-section {
+    margin-top: 20px;
+  }
+}
+
+/* Çalma Listesi Bölüm Grupları */
+.playlist-section-group {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 1em;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.playlist-section-group:first-child .section-title {
+  margin-top: 0;
+}
+
+/* Özel çalma listesi öğeleri için özel stiller */
+.custom-playlist-item .play-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.custom-playlist-item .play-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.custom-playlist-item .preview-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.custom-playlist-item .preview-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Öne Çıkan Çalma Listesi */
+.featured-playlist {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.featured-playlist:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.featured-playlist .playlist-name {
+  color: white;
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+.featured-playlist .playlist-description {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.playlist-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+  margin-top: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.featured-play-btn {
+  background: rgba(255, 255, 255, 0.25) !important;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+  font-weight: 700 !important;
+  padding: 10px 16px !important;
+}
+
+.featured-play-btn:hover {
+  background: rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2) !important;
+}
+
+.refresh-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  padding: 8px 12px;
+}
+
+.refresh-btn:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+.featured-playlist .refresh-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.featured-playlist .refresh-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Spotify Player Header */
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #1DB954;
+  color: white;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 0;
+}
+
+.player-header h4 {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.close-player {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-player:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* Spotify Embed Güncellemeleri */
+.spotify-embed {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.spotify-embed iframe {
+  border-radius: 0 0 8px 8px;
+}
+
+/* Mobil Responsive Güncellemeler */
+@media (max-width: 768px) {
+  .featured-playlist .playlist-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .featured-play-btn, .refresh-btn {
+    width: 100%;
+    padding: 12px 16px;
+  }
+  
+  .player-header {
+    padding: 10px 12px;
+  }
+  
+  .player-header h4 {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-playlist {
+    padding: 14px;
+  }
+  
+  .featured-playlist .playlist-name {
+    font-size: 1em;
+  }
+  
+  .playlist-badge {
+    font-size: 0.7em;
+    padding: 3px 6px;
+  }
+  
+  .player-header {
+    padding: 8px 10px;
+  }
+  
+  .player-header h4 {
+    font-size: 0.85em;
+  }
+}
+
+/* AI Plan Entegrasyonu Stilleri */
+.ai-success {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+.ai-success h4 {
+  margin: 0 0 16px 0;
+  font-size: 1.2em;
+}
+
+.ai-success p {
+  margin: 8px 0;
+  font-size: 0.95em;
+}
+
+.ai-note {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+}
+
+/* AI Plan Bilgileri */
+.ai-plan-info {
+  background: #f8f9fa;
+  border: 2px solid #1DB954;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.ai-plan-badge {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  background: #1DB954;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.ai-plan-info p {
+  margin: 8px 0;
+  font-size: 0.95em;
+}
+
+.no-ai-plan {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.no-ai-plan p {
+  margin: 0 0 12px 0;
+  color: #856404;
+}
+
+.ai-plan-btn {
+  background: #1DB954;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ai-plan-btn:hover {
+  background: #1ed760;
+  transform: translateY(-2px);
+}
+
+/* Haftalık Program Grid */
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.schedule-header h4 {
+  margin: 0;
+  color: #333;
+}
+
+.generate-btn {
+  background: #1DB954;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.generate-btn:hover:not(:disabled) {
+  background: #1ed760;
+  transform: translateY(-2px);
+}
+
+.generate-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.schedule-day {
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.schedule-day:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-day.workout-day {
+  border-color: #1DB954;
+  background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+}
+
+.schedule-day.rest-day {
+  border-color: #6c757d;
+  background: #f8f9fa;
+}
+
+.schedule-day.today {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+}
+
+.day-header {
+  margin-bottom: 12px;
+}
+
+.day-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9em;
+}
+
+.today-badge {
+  background: #ffc107;
+  color: #333;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 0.7em;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.workout-info, .rest-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.workout-icon, .rest-icon {
+  font-size: 1.5em;
+}
+
+.workout-details {
+  text-align: center;
+}
+
+.workout-type {
+  font-weight: 600;
+  color: #1DB954;
+  font-size: 0.85em;
+  margin-bottom: 4px;
+}
+
+.workout-duration {
+  color: #666;
+  font-size: 0.8em;
+}
+
+.rest-text {
+  color: #6c757d;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* Program İstatistikleri */
+.schedule-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.stat-item {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+  font-size: 1.5em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.8em;
+  color: #666;
+}
+
+/* Mobil Responsive */
+@media (max-width: 768px) {
+  .schedule-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .schedule-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  
+  .stat-item {
+    padding: 12px;
+  }
+  
+  .schedule-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .schedule-day {
+    padding: 12px;
+  }
+  
+  .workout-type {
+    font-size: 0.8em;
+  }
+  
+  .schedule-stats {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+/* Kas Grubu Seçimi Stilleri */
+.muscle-selection-container {
+  margin-top: 20px;
+}
+
+.muscle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.muscle-card {
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.muscle-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #1DB954;
+}
+
+.muscle-card.selected {
+  border-color: #1DB954;
+  background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.2);
+}
+
+.muscle-icon {
+  font-size: 2em;
+  margin-bottom: 8px;
+}
+
+.muscle-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9em;
+  margin-bottom: 12px;
+}
+
+.muscle-checkbox {
+  position: relative;
+}
+
+.muscle-checkbox-input {
+  display: none;
+}
+
+.muscle-checkbox-label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #1DB954;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.muscle-checkbox-input:checked + .muscle-checkbox-label {
+  background: #1DB954;
+  position: relative;
+}
+
+.muscle-checkbox-input:checked + .muscle-checkbox-label::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+/* Spor Kontrolleri */
+.workout-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.start-workout-btn, .stop-workout-btn {
+  flex: 1;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1em;
+}
+
+.start-workout-btn {
+  background: #1DB954;
+  color: white;
+}
+
+.start-workout-btn:hover:not(:disabled) {
+  background: #1ed760;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+}
+
+.start-workout-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.stop-workout-btn {
+  background: #dc3545;
+  color: white;
+}
+
+.stop-workout-btn:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* Spor İlerlemesi */
+.workout-progress {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.workout-progress h4 {
+  margin: 0 0 16px 0;
+  color: #333;
+}
+
+.progress-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.progress-item {
+  text-align: center;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.progress-icon {
+  font-size: 1.5em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.progress-value {
+  display: block;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.progress-label {
+  font-size: 0.8em;
+  color: #666;
+}
+
+/* Hareket Önerileri */
+.exercise-recommendations {
+  margin-top: 20px;
+}
+
+.exercise-recommendations h4 {
+  margin: 0 0 16px 0;
+  color: #333;
+}
+
+.muscle-exercises {
+  margin-bottom: 24px;
+}
+
+.muscle-exercises h5 {
+  margin: 0 0 12px 0;
+  color: #1DB954;
+  font-size: 1.1em;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exercise-item {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.exercise-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-item.completed {
+  border-color: #1DB954;
+  background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.exercise-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 1em;
+}
+
+.exercise-calories {
+  background: #ff6b6b;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.exercise-description {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.complete-exercise-btn {
+  background: #1DB954;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+}
+
+.complete-exercise-btn:hover:not(:disabled) {
+  background: #1ed760;
+  transform: translateY(-1px);
+}
+
+.complete-exercise-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Spor Sonucu Modal */
+.workout-result-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.workout-result-modal .modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.workout-result-modal .modal-header {
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px 12px 0 0;
+}
+
+.workout-result-modal .modal-header h3 {
+  margin: 0;
+  font-size: 1.3em;
+}
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.result-item {
+  text-align: center;
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.result-icon {
+  font-size: 1.5em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.result-value {
+  display: block;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.result-label {
+  font-size: 0.8em;
+  color: #666;
+}
+
+.completed-exercises, .muscle-groups {
+  margin-bottom: 20px;
+}
+
+.completed-exercises h4, .muscle-groups h4 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.completed-exercises ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.completed-exercises li {
+  background: #f8f9fa;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  border-left: 3px solid #1DB954;
+}
+
+.muscle-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.muscle-tag {
+  background: #1DB954;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+/* Mobil Responsive */
+@media (max-width: 768px) {
+  .muscle-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .workout-controls {
+    flex-direction: column;
+  }
+  
+  .progress-stats, .result-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .exercise-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .muscle-tags {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .muscle-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .muscle-card {
+    padding: 12px;
+  }
+  
+  .exercise-item {
+    padding: 12px;
+  }
+  
+  .workout-result-modal .modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+}
+
+/* Ana Sayfa Kas Grubu Seçimi ve Spor Takibi */
+.ai-plan-info-main {
+  background: #f8f9fa;
+  border: 2px solid #1DB954;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  position: relative;
+  text-align: center;
+}
+
+.ai-plan-badge-main {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1DB954;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.ai-plan-details {
+  margin-top: 8px;
+  font-size: 0.95em;
+  color: #333;
+}
+
+.selected-muscles-display {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.selected-muscles-display h4 {
+  margin: 0 0 12px 0;
+  color: #333;
+}
+
+.selected-muscles-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.muscle-tag-main {
+  background: #1DB954;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+/* Ana Sayfa Spor Kontrolleri */
+.workout-controls-main {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.start-workout-btn-main, .stop-workout-btn-main {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  min-width: 150px;
+}
+
+.start-workout-btn-main {
+  background: #1DB954;
+  color: white;
+}
+
+.start-workout-btn-main:hover {
+  background: #1ed760;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+}
+
+.stop-workout-btn-main {
+  background: #dc3545;
+  color: white;
+}
+
+.stop-workout-btn-main:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* Ana Sayfa Spor İlerlemesi */
+.workout-progress-main {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.workout-progress-main h4 {
+  margin: 0 0 16px 0;
+  color: #333;
+  text-align: center;
+}
+
+.progress-stats-main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.progress-item-main {
+  text-align: center;
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.progress-icon-main {
+  font-size: 1.5em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.progress-value-main {
+  display: block;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.progress-label-main {
+  font-size: 0.8em;
+  color: #666;
+}
+
+/* Ana Sayfa Hareket Önerileri */
+.exercise-recommendations-main {
+  margin: 20px 0;
+}
+
+.exercise-recommendations-main h4 {
+  margin: 0 0 16px 0;
+  color: #333;
+  text-align: center;
+}
+
+.muscle-exercises-main {
+  margin-bottom: 24px;
+}
+
+.muscle-exercises-main h5 {
+  margin: 0 0 12px 0;
+  color: #1DB954;
+  font-size: 1.1em;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e9ecef;
+  text-align: center;
+}
+
+.exercise-list-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exercise-item-main {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.exercise-item-main:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-item-main.completed {
+  border-color: #1DB954;
+  background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+}
+
+.exercise-header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.exercise-name-main {
+  font-weight: 600;
+  color: #333;
+  font-size: 1em;
+}
+
+.exercise-calories-main {
+  background: #ff6b6b;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.exercise-description-main {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.complete-exercise-btn-main {
+  background: #1DB954;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+}
+
+.complete-exercise-btn-main:hover:not(:disabled) {
+  background: #1ed760;
+  transform: translateY(-1px);
+}
+
+.complete-exercise-btn-main:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+/* Mobil Responsive */
+@media (max-width: 768px) {
+  .workout-controls-main {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .start-workout-btn-main, .stop-workout-btn-main {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .progress-stats-main {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .exercise-header-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .selected-muscles-list {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-plan-info-main {
+    padding: 12px;
+  }
+  
+  .selected-muscles-display {
+    padding: 12px;
+  }
+  
+  .workout-progress-main {
+    padding: 16px;
+  }
+  
+  .exercise-item-main {
+    padding: 12px;
+  }
+  
+  .muscle-tag-main {
+    font-size: 0.7em;
+    padding: 4px 8px;
+  }
+}
+
+/* Spor Özeti Bölümü */
+.today-workout-status {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.status-card {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.status-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.status-icon {
+  font-size: 1.5em;
+  margin-bottom: 8px;
+}
+
+.status-value {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.status-label {
+  font-size: 0.8em;
+  color: #666;
+}
+
+/* Haftalık İstatistikler */
+.weekly-stats {
+  margin-bottom: 20px;
+}
+
+.weekly-stats h3 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.weekly-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.week-day {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.week-day:hover {
+  background: #f8f9fa;
+  border-color: #1DB954;
+}
+
+.week-day.active {
+  background: #1DB954;
+  color: white;
+  border-color: #1DB954;
+}
+
+.day-name {
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.day-calories {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+/* Hızlı Erişim */
+.quick-actions {
+  margin-bottom: 20px;
+}
+
+.quick-actions h3 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.action-btn {
+  background: #1DB954;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+  text-align: left;
+}
+
+.action-btn:hover {
+  background: #1ed760;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+}
+
+/* Son Sporlar */
+.recent-workouts {
+  margin-bottom: 20px;
+}
+
+.recent-workouts h3 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.recent-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.no-workouts {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 20px;
+}
+
+.workout-item {
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.workout-info {
+  flex: 1;
+}
+
+.workout-date {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9em;
+}
+
+.workout-details {
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 4px;
+}
+
+.workout-calories {
+  background: #ff6b6b;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+/* Mobil Responsive */
+@media (max-width: 768px) {
+  .today-workout-status {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .weekly-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  
+  .week-day {
+    padding: 6px;
+  }
+  
+  .day-name {
+    font-size: 0.7em;
+  }
+  
+  .day-calories {
+    font-size: 0.8em;
+  }
+  
+  .action-buttons {
+    gap: 6px;
+  }
+  
+  .action-btn {
+    padding: 10px 12px;
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  .status-card {
+    padding: 12px;
+  }
+  
+  .status-value {
+    font-size: 1.1em;
+  }
+  
+  .weekly-grid {
+    gap: 2px;
+  }
+  
+  .week-day {
+    padding: 4px;
+  }
+  
+  .day-name {
+    font-size: 0.6em;
+  }
+  
+  .day-calories {
+    font-size: 0.7em;
+  }
+}
+
+/* Karanlık Mod Stilleri */
+.dark-theme {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+}
+
+.dark-theme .main-container {
+  background: #1a1a1a;
+}
+
+.dark-theme .dashboard-card {
+  background: #2d2d2d;
+  border: 1px solid #404040;
+  color: #ffffff;
+}
+
+.dark-theme .sidebar {
+  background: #2d2d2d;
+  border-right: 1px solid #404040;
+}
+
+.dark-theme .sidebar-header {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.dark-theme .menu-item {
+  background: #2d2d2d;
+  border: 1px solid #404040;
+  color: #ffffff;
+}
+
+.dark-theme .menu-item:hover {
+  background: #404040;
+  border-color: #1DB954;
+}
+
+.dark-theme .panel-container {
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+.dark-theme .form-input,
+.dark-theme .form-select,
+.dark-theme .form-textarea {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .form-input:focus,
+.dark-theme .form-select:focus,
+.dark-theme .form-textarea:focus {
+  border-color: #1DB954;
+  background: #404040;
+}
+
+.dark-theme .btn-primary {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .btn-secondary {
+  background: #404040;
+  color: #ffffff;
+  border: 1px solid #555555;
+}
+
+.dark-theme .btn-danger {
+  background: #dc3545;
+  color: #ffffff;
+}
+
+.dark-theme .status-card {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .week-day {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .week-day:hover {
+  background: #555555;
+  border-color: #1DB954;
+}
+
+.dark-theme .week-day.active {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .action-btn {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .workout-item {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .exercise-item {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .exercise-item.completed {
+  background: linear-gradient(135deg, #2d4a2d 0%, #1a3a1a 100%);
+  border-color: #1DB954;
+}
+
+.dark-theme .muscle-card {
+  background: #404040;
+  border: 2px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .muscle-card:hover {
+  border-color: #1DB954;
+  background: #555555;
+}
+
+.dark-theme .muscle-card.selected {
+  border-color: #1DB954;
+  background: linear-gradient(135deg, #2d4a2d 0%, #1a3a1a 100%);
+}
+
+.dark-theme .progress-item {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .progress-item-main {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .health-stat-card {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .goal-form {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .photo-form {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .leaderboard-list {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .prediction-card,
+.dark-theme .risk-card,
+.dark-theme .optimization-card {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .theme-option,
+.dark-theme .notification-option,
+.dark-theme .privacy-option {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .theme-option:hover,
+.dark-theme .notification-option:hover,
+.dark-theme .privacy-option:hover {
+  background: #555555;
+}
+
+.dark-theme .measurement-form,
+.dark-theme .health-form {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .measurements-list {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .goals-list {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .photo-gallery {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .recommendations-list {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .water-progress {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .water-progress-bar {
+  background: #555555;
+}
+
+.dark-theme .water-btn {
+  background: #1DB954;
+  color: #ffffff;
+  border: 1px solid #1DB954;
+}
+
+.dark-theme .water-btn:hover {
+  background: #1ed760;
+}
+
+.dark-theme .filter-btn {
+  background: #404040;
+  color: #ffffff;
+  border: 1px solid #555555;
+}
+
+.dark-theme .filter-btn.active {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .filter-btn:hover {
+  background: #555555;
+}
+
+.dark-theme .loading {
+  color: #cccccc;
+}
+
+.dark-theme .no-workouts {
+  color: #cccccc;
+}
+
+.dark-theme .trend-info {
+  color: #cccccc;
+}
+
+.dark-theme .about-info {
+  color: #cccccc;
+}
+
+.dark-theme .data-buttons {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .water-goal {
+  color: #cccccc;
+}
+
+.dark-theme .stat-label,
+.dark-theme .progress-label,
+.dark-theme .progress-label-main {
+  color: #cccccc;
+}
+
+.dark-theme .day-name {
+  color: #cccccc;
+}
+
+.dark-theme .notification-label,
+.dark-theme .theme-label,
+.dark-theme .privacy-label {
+  color: #ffffff;
+}
+
+/* Karanlık mod için özel renkler */
+.dark-theme .exercise-calories,
+.dark-theme .exercise-calories-main {
+  background: #ff6b6b;
+  color: #ffffff;
+}
+
+.dark-theme .workout-calories {
+  background: #ff6b6b;
+  color: #ffffff;
+}
+
+.dark-theme .muscle-tag,
+.dark-theme .muscle-tag-main {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .ai-plan-info,
+.dark-theme .ai-plan-info-main {
+  background: #2d4a2d;
+  border: 2px solid #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .ai-plan-badge,
+.dark-theme .ai-plan-badge-main {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .ai-plan-details {
+  color: #cccccc;
+}
+
+.dark-theme .selected-muscles-display {
+  background: #404040;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .workout-progress,
+.dark-theme .workout-progress-main {
+  background: #2d2d2d;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .exercise-recommendations,
+.dark-theme .exercise-recommendations-main {
+  background: #2d2d2d;
+  border: 1px solid #555555;
+  color: #ffffff;
+}
+
+.dark-theme .muscle-exercises h5,
+.dark-theme .muscle-exercises-main h5 {
+  color: #1DB954;
+  border-bottom: 2px solid #555555;
+}
+
+.dark-theme .exercise-description,
+.dark-theme .exercise-description-main {
+  color: #cccccc;
+}
+
+.dark-theme .exercise-name,
+.dark-theme .exercise-name-main {
+  color: #ffffff;
+}
+
+.dark-theme .complete-exercise-btn,
+.dark-theme .complete-exercise-btn-main {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .complete-exercise-btn:hover:not(:disabled),
+.dark-theme .complete-exercise-btn-main:hover:not(:disabled) {
+  background: #1ed760;
+}
+
+.dark-theme .complete-exercise-btn:disabled,
+.dark-theme .complete-exercise-btn-main:disabled {
+  background: #555555;
+  color: #cccccc;
+}
+
+/* Karanlık mod için modal stilleri */
+.dark-theme .workout-result-modal .modal-content {
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+.dark-theme .workout-result-modal .modal-header {
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  color: #ffffff;
+}
+
+.dark-theme .workout-result-modal .result-item {
+  background: #404040;
+  color: #ffffff;
+}
+
+.dark-theme .workout-result-modal .completed-exercises li {
+  background: #404040;
+  border-left: 3px solid #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .workout-result-modal .muscle-tag {
+  background: #1DB954;
+  color: #ffffff;
+}
+
+/* Karanlık mod için form etiketleri */
+.dark-theme label {
+  color: #ffffff;
+}
+
+.dark-theme h1, .dark-theme h2, .dark-theme h3, .dark-theme h4, .dark-theme h5, .dark-theme h6 {
+  color: #ffffff;
+}
+
+/* Karanlık mod için placeholder renkleri */
+.dark-theme ::placeholder {
+  color: #999999;
+}
+
+.dark-theme ::-webkit-input-placeholder {
+  color: #999999;
+}
+
+.dark-theme ::-moz-placeholder {
+  color: #999999;
+}
+
+/* Karanlık mod için scrollbar */
+.dark-theme ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark-theme ::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: #555555;
+  border-radius: 4px;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: #666666;
+}
+
+/* Yeni Panel Stilleri */
+
+/* Vücut Takibi Stilleri */
+.measurement-input-section,
+.health-input-section,
+.goal-creation-section,
+.photo-upload-section {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.measurement-form,
+.health-form,
+.goal-form,
+.photo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.chart-container {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  height: 300px;
+}
+
+.trend-info {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.measurements-list {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.measurement-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 8px;
+}
+
+.measurement-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.measurement-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.measurement-value {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #1DB954;
+}
+
+.measurement-date {
+  color: #666;
+  font-size: 0.9em;
+}
+
+/* Sağlık Takibi Stilleri */
+.daily-health-summary {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.health-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.health-stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.stat-icon {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+.water-tracking-section {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.water-progress {
+  margin-top: 15px;
+}
+
+.water-goal {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.water-progress-bar {
+  width: 100%;
+  height: 20px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.water-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  transition: width 0.3s ease;
+  border-radius: 10px;
+}
+
+.water-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.water-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #1DB954;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.water-btn:hover {
+  background: #1ed760;
+  transform: translateY(-2px);
+}
+
+/* Hedefler Stilleri */
+.goals-list {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.goal-item {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.goal-item:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.goal-item.completed {
+  background: linear-gradient(135deg, #2d4a2d 0%, #1a3a1a 100%);
+  border-color: #1DB954;
+  color: white;
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.goal-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #333;
+}
+
+.goal-item.completed .goal-title {
+  color: white;
+}
+
+.goal-progress {
+  background: #1DB954;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.goal-description {
+  color: #666;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.goal-item.completed .goal-description {
+  color: #e0e0e0;
+}
+
+.goal-target {
+  font-weight: 600;
+  color: #1DB954;
+  margin-bottom: 5px;
+}
+
+.goal-item.completed .goal-target {
+  color: #90EE90;
+}
+
+.goal-deadline {
+  font-size: 0.9em;
+  color: #999;
+}
+
+.goal-item.completed .goal-deadline {
+  color: #ccc;
+}
+
+.goal-completed-date {
+  background: #1DB954;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+/* İlerleme Fotoğrafları Stilleri */
+.photo-upload-area {
+  border: 2px dashed #1DB954;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.photo-upload-area:hover {
+  background: #e8f5e8;
+  border-color: #1ed760;
+}
+
+.photo-upload-btn {
+  background: #1DB954;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.photo-upload-btn:hover {
+  background: #1ed760;
+  transform: translateY(-2px);
+}
+
+.photo-gallery {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.photo-item {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.progress-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #1DB954;
+}
+
+.photo-info {
+  flex: 1;
+}
+
+.photo-type {
+  font-weight: 700;
+  color: #1DB954;
+  margin-bottom: 5px;
+}
+
+.photo-date {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
+.photo-description {
+  color: #333;
+  line-height: 1.4;
+}
+
+/* Liderlik Tablosu Stilleri */
+.leaderboard-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.filter-btn:hover {
+  background: #f8f9fa;
+  border-color: #1DB954;
+}
+
+.filter-btn.active {
+  background: #1DB954;
+  color: white;
+  border-color: #1DB954;
+}
+
+.leaderboard-list {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 10px;
+}
+
+.leaderboard-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.rank {
+  background: #1DB954;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.username {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.user-stats {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.user-score {
+  background: #ff6b6b;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+.my-ranking-section {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.my-ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 12px;
+}
+
+/* AI Analiz Stilleri */
+.prediction-card,
+.risk-card,
+.optimization-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.prediction-content h5,
+.risk-content h5,
+.optimization-content h5 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.prediction-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.prediction-stat {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.3em;
+  font-weight: 700;
+  color: #1DB954;
+}
+
+.confidence-level {
+  background: #e8f5e8;
+  color: #2d4a2d;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.risk-level {
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.risk-factors,
+.risk-recommendations {
+  margin-bottom: 15px;
+}
+
+.risk-factors h6,
+.risk-recommendations h6 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.risk-factors ul,
+.risk-recommendations ul {
+  padding-left: 20px;
+}
+
+.risk-factors li,
+.risk-recommendations li {
+  margin-bottom: 8px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.recommendations-list {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.recommendation-item {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.recommendation-item:last-child {
+  margin-bottom: 0;
+}
+
+.recommendation-type {
+  font-weight: 700;
+  color: #1DB954;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.recommendation-message {
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.recommendation-foods {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.optimization-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.suggestion {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  color: #333;
+}
+
+/* Ayarlar Stilleri */
+.theme-settings-section,
+.notification-settings-section,
+.privacy-settings-section,
+.data-management-section,
+.about-section {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.theme-options,
+.notification-options,
+.privacy-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.theme-option,
+.notification-option,
+.privacy-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-option:hover,
+.notification-option:hover,
+.privacy-option:hover {
+  background: #f8f9fa;
+  border-color: #1DB954;
+}
+
+.theme-label,
+.notification-label,
+.privacy-label {
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+}
+
+.data-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.about-info {
+  margin-top: 15px;
+}
+
+.about-info p {
+  margin-bottom: 8px;
+  color: #666;
+}
+
+.about-info strong {
+  color: #333;
+}
+
+/* Loading ve boş durum stilleri */
+.loading {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 40px;
+}
+
+.no-workouts,
+.trend-info p {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 20px;
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+  .health-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .prediction-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .water-buttons {
+    flex-direction: column;
+  }
+  
+  .leaderboard-filters {
+    flex-direction: column;
+  }
+  
+  .data-buttons {
+    flex-direction: column;
+  }
+  
+  .photo-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .progress-photo {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* Reklam Stilleri */
+.ad-container {
+  background: #ffffff;
+  border: 2px dashed #1DB954;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.ad-container:hover {
+  border-color: #1ed760;
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.2);
+}
+
+.ad-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.ad-label {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #1DB954;
+  margin-bottom: 5px;
+}
+
+.ad-text {
+  color: #666;
+  font-size: 0.9em;
+  margin-bottom: 15px;
+}
+
+.upgrade-btn {
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+}
+
+.upgrade-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+}
+
+.upgrade-btn:active {
+  transform: translateY(0);
+}
+
+/* Gerçek reklam stilleri */
+.ad-container.real-ad {
+  border: 1px solid #e0e0e0;
+  background: #f8f9fa;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-container.real-ad .ad-placeholder {
+  display: none;
+}
+
+/* Premium kullanıcılar için reklam gizleme */
+.ad-container.premium-hidden {
+  display: none !important;
+}
+
+/* Karanlık mod için reklam stilleri */
+.dark-theme .ad-container {
+  background: #2d2d2d;
+  border-color: #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .ad-container.real-ad {
+  background: #404040;
+  border-color: #555555;
+}
+
+.dark-theme .ad-text {
+  color: #cccccc;
+}
+
+.dark-theme .upgrade-btn {
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  color: white;
+}
+
+/* Responsive reklam tasarımı */
+@media (max-width: 768px) {
+  .ad-container {
+    padding: 15px;
+    margin: 15px 0;
+  }
+  
+  .ad-label {
+    font-size: 1.1em;
+  }
+  
+  .upgrade-btn {
+    padding: 10px 20px;
+    font-size: 0.85em;
+  }
+}
+
+/* Reklam yükleme animasyonu */
+.ad-container.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.ad-container.loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Premium Modal Stilleri */
+.premium-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.premium-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.premium-modal-content {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.premium-modal.show .premium-modal-content {
+  transform: scale(1);
+}
+
+.premium-modal-header {
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  color: white;
+  padding: 25px 30px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.premium-modal-header h2 {
+  margin: 0;
+  font-size: 1.8em;
+  font-weight: 700;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2em;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.premium-modal-body {
+  padding: 30px;
+}
+
+.premium-features {
+  margin-bottom: 30px;
+}
+
+.premium-features h3 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.3em;
+}
+
+.premium-features ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.premium-features li {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  color: #555;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.premium-features li:last-child {
+  border-bottom: none;
+}
+
+.premium-pricing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.price-card {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.price-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.price-card.featured {
+  border-color: #1DB954;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e8f5e8 100%);
+  transform: scale(1.05);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1DB954;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.price-card h4 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.price {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #1DB954;
+  margin-bottom: 10px;
+}
+
+.price span {
+  font-size: 0.4em;
+  color: #666;
+  font-weight: 400;
+}
+
+.savings {
+  background: #ff6b6b;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 0.9em;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.price-card .upgrade-btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1em;
+  border-radius: 10px;
+}
+
+/* Karanlık mod için premium modal */
+.dark-theme .premium-modal-content {
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+.dark-theme .premium-features h3 {
+  color: #ffffff;
+}
+
+.dark-theme .premium-features li {
+  color: #cccccc;
+  border-bottom-color: #404040;
+}
+
+.dark-theme .price-card {
+  background: #404040;
+  border-color: #555555;
+  color: #ffffff;
+}
+
+.dark-theme .price-card.featured {
+  background: linear-gradient(135deg, #404040 0%, #2d4a2d 100%);
+  border-color: #1DB954;
+}
+
+.dark-theme .price-card h4 {
+  color: #ffffff;
+}
+
+.dark-theme .price {
+  color: #1DB954;
+}
+
+.dark-theme .price span {
+  color: #cccccc;
+}
+
+/* Responsive premium modal */
+@media (max-width: 768px) {
+  .premium-modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .premium-modal-header {
+    padding: 20px;
+  }
+  
+  .premium-modal-header h2 {
+    font-size: 1.5em;
+  }
+  
+  .premium-modal-body {
+    padding: 20px;
+  }
+  
+  .premium-pricing {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .price-card.featured {
+    transform: none;
+  }
+  
+  .price {
+    font-size: 2em;
+  }
+}
+
+/* Premium badge stilleri */
+.premium-badge {
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  color: white;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 0.7em;
+  font-weight: 600;
+  margin-left: 5px;
+  display: none;
+}
+
+/* Premium özellik stilleri */
+.premium-feature {
+  position: relative;
+}
+
+.premium-feature.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.premium-feature.disabled::after {
+  content: '🔒';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.2em;
+}
+
+.premium-feature.enabled {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.premium-feature.enabled::after {
+  content: '💎';
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.2em;
+}
+
+/* Reklam Yönetimi Stilleri */
+.ad-management-section {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.ad-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.ad-info {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.ad-info p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.ad-info strong {
+  color: #333;
+}
+
+/* Reklam İstatistik Stilleri */
+.ad-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.ad-stats-grid .stat-card {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.ad-stats-grid .stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ad-stats-grid .stat-icon {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.ad-stats-grid .stat-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #1DB954;
+  margin-bottom: 5px;
+}
+
+.ad-stats-grid .stat-label {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.ad-recommendations {
+  background: #e8f5e8;
+  border: 1px solid #1DB954;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.ad-recommendations h3 {
+  color: #2d4a2d;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.ad-recommendations ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ad-recommendations li {
+  padding: 8px 0;
+  color: #2d4a2d;
+  border-bottom: 1px solid #c8e6c9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ad-recommendations li:last-child {
+  border-bottom: none;
+}
+
+.ad-recommendations li::before {
+  content: '💡';
+  font-size: 1.1em;
+}
+
+/* Karanlık mod için reklam yönetimi */
+.dark-theme .ad-management-section {
+  background: #2d2d2d;
+  border-color: #555555;
+  color: #ffffff;
+}
+
+.dark-theme .ad-info {
+  background: #404040;
+  border-color: #555555;
+  color: #cccccc;
+}
+
+.dark-theme .ad-info strong {
+  color: #ffffff;
+}
+
+.dark-theme .ad-stats-grid .stat-card {
+  background: #404040;
+  border-color: #555555;
+  color: #ffffff;
+}
+
+.dark-theme .ad-stats-grid .stat-value {
+  color: #1DB954;
+}
+
+.dark-theme .ad-stats-grid .stat-label {
+  color: #cccccc;
+}
+
+.dark-theme .ad-recommendations {
+  background: #2d4a2d;
+  border-color: #1DB954;
+  color: #ffffff;
+}
+
+.dark-theme .ad-recommendations h3 {
+  color: #ffffff;
+}
+
+.dark-theme .ad-recommendations li {
+  color: #e0e0e0;
+  border-bottom-color: #1DB954;
+}
+
+/* Responsive reklam yönetimi */
+@media (max-width: 768px) {
+  .ad-controls {
+    flex-direction: column;
+  }
+  
+  .ad-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .ad-stats-grid .stat-card {
+    padding: 15px;
+  }
+  
+  .ad-stats-grid .stat-icon {
+    font-size: 1.5em;
+  }
+  
+  .ad-stats-grid .stat-value {
+    font-size: 1.2em;
+  }
+}
+
+/* Logo Stilleri */
+.app-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.app-logo:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.main-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.main-logo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: linear-gradient(135deg, #1DB954 0%, #1ed760 100%);
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 15px rgba(29, 185, 84, 0.3);
+  margin-bottom: 20px;
+}
+
+/* Karanlık mod için logo stilleri */
+.dark-theme .app-logo,
+.dark-theme .main-logo {
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .app-logo:hover,
+.dark-theme .main-logo:hover {
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive logo tasarımı */
+@media (max-width: 768px) {
+  .app-logo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .main-logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .main-header {
+    padding: 10px;
+    border-radius: 0 0 15px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-logo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .main-logo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Sidebar Logo Stilleri */
+.sidebar-logo {
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.sidebar-logo-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.sidebar-logo-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/* Karanlık mod için sidebar logo */
+.dark-theme .sidebar-logo-img {
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .sidebar-logo-img:hover {
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive sidebar logo */
+@media (max-width: 768px) {
+  .sidebar-logo-img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sidebar-logo {
+    margin-bottom: 10px;
+    padding: 8px;
+  }
+}
+
+/* Kas Grubu Seçim Stilleri */
+.muscle-selection-container {
+  margin: 20px 0;
+}
+
+.muscle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.muscle-category {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.muscle-category:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.muscle-category h4 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #1DB954;
+}
+
+.muscle-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.muscle-item {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.muscle-item:hover {
+  transform: scale(1.05);
+  background: #e8f5e8;
+  border-color: #1DB954;
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.2);
+}
+
+.muscle-item.selected {
+  background: #d4edda;
+  border-color: #28a745;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.muscle-item.selected::before {
+  content: "✓";
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  background: #28a745;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.muscle-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 2px solid #ddd;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.muscle-item:hover .muscle-icon {
+  border-color: #1DB954;
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+}
+
+.muscle-info h5 {
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  margin: 0 0 5px 0;
+}
+
+.muscle-info p {
+  color: #666;
+  font-size: 11px;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Seçilen kas grupları gösterimi */
+#secili-kas {
+  background: #e8f5e8;
+  border: 2px solid #1DB954;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 20px 0;
+  text-align: center;
+  display: none;
+}
+
+#secili-kas.show {
+  display: block;
+}
+
+#secili-kas h4 {
+  color: #1DB954;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.selected-muscles-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.muscle-tag {
+  background: #1DB954;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.muscle-tag .remove-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.muscle-tag .remove-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* Karanlık mod için kas seçim stilleri */
+.dark-theme .muscle-category {
+  background: #2d3748;
+  border-color: #4a5568;
+}
+
+.dark-theme .muscle-category h4 {
+  color: #e2e8f0;
+  border-bottom-color: #1DB954;
+}
+
+.dark-theme .muscle-item {
+  background: #4a5568;
+  color: #e2e8f0;
+}
+
+.dark-theme .muscle-item:hover {
+  background: #2d3748;
+  border-color: #1DB954;
+}
+
+.dark-theme .muscle-item.selected {
+  background: #22543d;
+  border-color: #28a745;
+}
+
+.dark-theme .muscle-info h5 {
+  color: #e2e8f0;
+}
+
+.dark-theme .muscle-info p {
+  color: #a0aec0;
+}
+
+.dark-theme #secili-kas {
+  background: #22543d;
+  border-color: #1DB954;
+}
+
+.dark-theme #secili-kas h4 {
+  color: #68d391;
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+  .muscle-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .muscle-items {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+  }
+  
+  .muscle-category {
+    padding: 15px;
+  }
+  
+  .muscle-item {
+    padding: 12px;
+  }
+  
+  .muscle-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .muscle-info h5 {
+    font-size: 13px;
+  }
+  
+  .muscle-info p {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .muscle-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .muscle-category h4 {
+    font-size: 16px;
+  }
+  
+  .muscle-item {
+    padding: 10px;
+  }
+}
+
+/* Önerilen Hareketler Stilleri */
+.exercise-recommendations-main {
+  margin-top: 30px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  background: #f8f9fa;
+  color: #666;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.filter-btn:hover {
+  border-color: #1DB954;
+  background: #e8f5e8;
+  color: #1DB954;
+}
+
+.filter-btn.active {
+  background: #1DB954;
+  color: white;
+  border-color: #1DB954;
+}
+
+.exercises-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.exercise-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.exercise-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-color: #1DB954;
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.exercise-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+
+.exercise-difficulty {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.exercise-difficulty.beginner {
+  background: #d4edda;
+  color: #155724;
+}
+
+.exercise-difficulty.intermediate {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.exercise-difficulty.advanced {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.exercise-details {
+  margin-bottom: 15px;
+}
+
+.exercise-detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.exercise-detail-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.exercise-description {
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.exercise-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.exercise-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.exercise-btn.primary {
+  background: #1DB954;
+  color: white;
+}
+
+.exercise-btn.primary:hover {
+  background: #1ed760;
+  transform: translateY(-1px);
+}
+
+.exercise-btn.secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.exercise-btn.secondary:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+/* Karanlık mod için hareket stilleri */
+.dark-theme .exercise-recommendations-main {
+  background: #2d3748;
+  border-color: #4a5568;
+}
+
+.dark-theme .exercise-card {
+  background: #4a5568;
+  border-color: #718096;
+}
+
+.dark-theme .exercise-title {
+  color: #e2e8f0;
+}
+
+.dark-theme .exercise-description {
+  color: #a0aec0;
+}
+
+.dark-theme .filter-btn {
+  background: #4a5568;
+  border-color: #718096;
+  color: #a0aec0;
+}
+
+.dark-theme .filter-btn:hover {
+  background: #2d3748;
+  border-color: #1DB954;
+  color: #1DB954;
+}
+
+.dark-theme .filter-btn.active {
+  background: #1DB954;
+  color: white;
+  border-color: #1DB954;
+}
+
+/* Responsive hareket tasarımı */
+@media (max-width: 768px) {
+  .exercise-filters {
+    gap: 8px;
+  }
+  
+  .filter-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+  
+  .exercises-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .exercise-card {
+    padding: 15px;
+  }
+  
+  .exercise-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .exercise-filters {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .filter-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Egzersiz Detay Modal */
+.exercise-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.exercise-modal-content {
+    background: white;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.exercise-modal-header {
+    padding: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px 15px 0 0;
+}
+
+.exercise-modal-header h3 {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.exercise-modal-close {
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.exercise-modal-close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.exercise-modal-body {
+    padding: 20px;
+}
+
+.exercise-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.exercise-info-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border-left: 4px solid #667eea;
+}
+
+.info-label {
+    display: block;
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.exercise-info-item span:last-child {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #333;
+}
+
+.exercise-description, .exercise-tips {
+    margin-bottom: 25px;
+}
+
+.exercise-description h4, .exercise-tips h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 8px;
+}
+
+.exercise-steps-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: step-counter;
+}
+
+.exercise-steps-list li {
+    counter-increment: step-counter;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #28a745;
+    position: relative;
+    padding-left: 60px;
+}
+
+.exercise-steps-list li:before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #28a745;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.exercise-tips-list {
+    list-style: none;
+    padding: 0;
+}
+
+.exercise-tips-list li {
+    margin-bottom: 10px;
+    padding: 12px 15px;
+    background: #fff3cd;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+    position: relative;
+    padding-left: 45px;
+}
+
+.exercise-tips-list li:before {
+    content: "💡";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+}
+
+.exercise-modal-footer {
+    padding: 20px;
+    border-top: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    background: #f8f9fa;
+    border-radius: 0 0 15px 15px;
+}
+
+.exercise-modal-footer .exercise-btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.exercise-modal-footer .exercise-btn.primary {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+}
+
+.exercise-modal-footer .exercise-btn.primary:hover {
+    background: linear-gradient(135deg, #218838 0%, #1aa179 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.exercise-modal-footer .exercise-btn.secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.exercise-modal-footer .exercise-btn.secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+}
+
+.exercise-btn.danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+}
+
+.exercise-btn.danger:hover {
+    background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+}
+
+/* Egzersiz timer stilleri */
+.exercise-timer {
+    text-align: center;
+    margin-top: 10px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px solid #28a745;
+}
+
+.timer-text {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #28a745;
+}
+
+.dark-mode .exercise-timer {
+    background: #4a5568;
+    border-color: #48bb78;
+}
+
+.dark-mode .timer-text {
+    color: #48bb78;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Dark mode için modal stilleri */
+.dark-mode .exercise-modal-content {
+    background: #2d3748;
+    color: #e2e8f0;
+}
+
+.dark-mode .exercise-info-item {
+    background: #4a5568;
+    border-left-color: #667eea;
+}
+
+.dark-mode .exercise-info-item span:last-child {
+    color: #e2e8f0;
+}
+
+.dark-mode .exercise-steps-list li {
+    background: #4a5568;
+    border-left-color: #28a745;
+}
+
+.dark-mode .exercise-tips-list li {
+    background: #744210;
+    border-left-color: #ffc107;
+}
+
+.dark-mode .exercise-modal-footer {
+    background: #4a5568;
+    border-top-color: #718096;
+}
+
+/* Modal mobile responsive */
+@media (max-width: 768px) {
+    .exercise-modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .exercise-modal-header {
+        padding: 15px;
+    }
+    
+    .exercise-modal-body {
+        padding: 15px;
+    }
+    
+    .exercise-info-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .exercise-modal-footer {
+        padding: 15px;
+        flex-direction: column;
+    }
+    
+    .exercise-modal-footer .exercise-btn {
+        padding: 15px;
+    }
+}
