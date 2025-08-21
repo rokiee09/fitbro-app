@@ -78,14 +78,14 @@ const sidebarGenderIcon = document.getElementById('sidebar-gender-icon');
 // Auth form switching
 showRegister.addEventListener('click', (e) => {
   e.preventDefault();
-  document.getElementById('loginForm').style.display = 'none';
-  document.getElementById('registerForm').style.display = 'block';
+  document.getElementById('loginForm').classList.add('hidden');
+  document.getElementById('registerForm').classList.remove('hidden');
 });
 
 showLogin.addEventListener('click', (e) => {
   e.preventDefault();
-  document.getElementById('registerForm').style.display = 'none';
-  document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('registerForm').classList.add('hidden');
+  document.getElementById('loginForm').classList.remove('hidden');
 });
 
 // Hamburger menü açma/kapama
