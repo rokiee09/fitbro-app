@@ -33,17 +33,17 @@ async function apiRequest(endpoint, options = {}) {
 }
 
 // Auth Functions
-async function registerUser(username, password, email) {
+async function registerUser(username, email, password) {
   return await apiRequest('/auth/register', {
     method: 'POST',
-    body: JSON.stringify({ username, password, email })
+    body: JSON.stringify({ username, email, password })
   });
 }
 
-async function loginUser(email, password) {
+async function loginUser(username, password) {
   return await apiRequest('/auth/login', {
     method: 'POST',
-    body: JSON.stringify({ email, password })
+    body: JSON.stringify({ username, password })
   });
 }
 
@@ -87,6 +87,87 @@ showLogin.addEventListener('click', (e) => {
   document.getElementById('registerForm').classList.add('hidden');
   document.getElementById('loginForm').classList.remove('hidden');
 });
+
+// Form submissions
+registerForm.addEventListener('submit', handleRegister);
+loginForm.addEventListener('submit', handleLogin);
+
+// Form handling functions
+async function handleRegister(e) {
+  e.preventDefault();
+  
+  const username = document.getElementById('registerUsername').value.trim();
+  const email = document.getElementById('registerEmail').value.trim();
+  const password = document.getElementById('registerPassword').value;
+  const confirmPassword = document.getElementById('registerConfirmPassword').value;
+  
+  // Validation
+  if (password !== confirmPassword) {
+    alert('❌ Şifreler eşleşmiyor!');
+    return;
+  }
+  
+  if (password.length < 6) {
+    alert('❌ Şifre en az 6 karakter olmalı!');
+    return;
+  }
+  
+  try {
+    const response = await registerUser(username, email, password);
+    alert('✅ Hesap başarıyla oluşturuldu!');
+    
+    // Auto login
+    const loginResponse = await loginUser(username, password);
+    localStorage.setItem('authToken', loginResponse.token);
+    localStorage.setItem('currentUser', JSON.stringify(loginResponse.user));
+    
+    // Show main app
+    authScreen.classList.add('hidden');
+    mainApp.classList.remove('hidden');
+    
+    // Update UI
+    updateUserInterface(loginResponse.user);
+    
+  } catch (error) {
+    if (error.message.includes('zaten kullanılıyor')) {
+      alert('❌ Bu e-posta adresi zaten kayıtlı!');
+    } else {
+      alert('❌ Kayıt hatası: ' + error.message);
+    }
+  }
+}
+
+async function handleLogin(e) {
+  e.preventDefault();
+  
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  
+  try {
+    const response = await loginUser(username, password);
+    localStorage.setItem('authToken', response.token);
+    localStorage.setItem('currentUser', JSON.stringify(response.user));
+    
+    // Show main app
+    authScreen.classList.add('hidden');
+    mainApp.classList.remove('hidden');
+    
+    // Update UI
+    updateUserInterface(response.user);
+    
+  } catch (error) {
+    alert('❌ Giriş hatası: ' + error.message);
+  }
+}
+
+function updateUserInterface(user) {
+  if (sidebarUsername) {
+    sidebarUsername.textContent = user.username;
+  }
+  if (currentUser) {
+    currentUser.textContent = user.username;
+  }
+}
 
 // Hamburger menü açma/kapama
 hamburger.addEventListener('click', () => {

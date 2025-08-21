@@ -25,25 +25,23 @@
         <img src="logo.png" alt="FitPlan Logo" class="app-logo">
       </div>
             <form id="loginForm" class="auth-form">
-                <h2>Giriş Yap</h2>
-        <input type="text" id="loginUsername" placeholder="Kullanıcı Adı" required>
+                <h2>🔐 Giriş Yap</h2>
+                <input type="text" id="loginUsername" placeholder="Kullanıcı Adı" required>
                 <input type="password" id="loginPassword" placeholder="Şifre" required>
-        <div class="gender-select">
-          <label><input type="radio" name="loginGender" value="male" checked> Erkek</label>
-          <label><input type="radio" name="loginGender" value="female"> Kadın</label>
-        </div>
-        <button type="submit">Giriş Yap</button>
+                <button type="submit">🚀 Giriş Yap</button>
                 <p class="auth-switch">Hesabın yok mu? <a href="#" id="showRegister">Kayıt Ol</a></p>
             </form>
             <form id="registerForm" class="auth-form hidden">
-                <h2>Kayıt Ol</h2>
+                <h2>📝 Hesap Oluştur</h2>
                 <input type="text" id="registerUsername" placeholder="Kullanıcı Adı" required>
+                <input type="email" id="registerEmail" placeholder="E-posta Adresi" required>
                 <input type="password" id="registerPassword" placeholder="Şifre" required>
-        <div class="gender-select">
-          <label><input type="radio" name="registerGender" value="male" checked> Erkek</label>
-          <label><input type="radio" name="registerGender" value="female"> Kadın</label>
-        </div>
-        <button type="submit">Kayıt Ol</button>
+                <input type="password" id="registerConfirmPassword" placeholder="Şifre Tekrar" required>
+                <div class="gender-select">
+                  <label><input type="radio" name="registerGender" value="male" checked> Erkek</label>
+                  <label><input type="radio" name="registerGender" value="female"> Kadın</label>
+                </div>
+                <button type="submit">🚀 Hesap Oluştur</button>
                 <p class="auth-switch">Zaten hesabın var mı? <a href="#" id="showLogin">Giriş Yap</a></p>
             </form>
     </div>
