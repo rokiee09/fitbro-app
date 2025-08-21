@@ -1,7 +1,7 @@
 // FİTBRO Uygulaması - JavaScript
 
 // API Configuration
-const API_BASE_URL = 'https://fitbro-mzzt5jh1w-burakavcis-projects.vercel.app/api';
+const API_BASE_URL = 'https://fitbro-app-git-master-burakavcis-projects.vercel.app/api';
 let authToken = localStorage.getItem('authToken');
 let currentUserData = null;
 
