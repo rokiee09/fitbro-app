@@ -75,6 +75,19 @@ const hamburger = document.getElementById('hamburger');
 const sidebarUsername = document.getElementById('sidebar-username');
 const sidebarGenderIcon = document.getElementById('sidebar-gender-icon');
 
+// Auth form switching
+showRegister.addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('registerForm').style.display = 'block';
+});
+
+showLogin.addEventListener('click', (e) => {
+  e.preventDefault();
+  document.getElementById('registerForm').style.display = 'none';
+  document.getElementById('loginForm').style.display = 'block';
+});
+
 // Hamburger menü açma/kapama
 hamburger.addEventListener('click', () => {
   sidebar.classList.toggle('open');
