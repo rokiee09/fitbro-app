@@ -1,4 +1,6 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = 'fitbro_secret_key_2024';
 
 const auth = (req, res, next) => {
   try {
@@ -8,7 +10,7 @@ const auth = (req, res, next) => {
       return res.status(401).json({ message: 'Token bulunamadı' });
     }
     
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+    const decoded = jwt.verify(token, JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
@@ -16,4 +18,4 @@ const auth = (req, res, next) => {
   }
 };
 
-module.exports = auth;
+export default auth;

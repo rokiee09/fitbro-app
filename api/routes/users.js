@@ -6,7 +6,7 @@ const router = express.Router();
 // Kullanıcı profili getir
 router.get('/profile', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select('-password');
+    const user = await User.findById(req.user.userId).select('-password');
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: 'Sunucu hatası' });
@@ -17,7 +17,7 @@ router.get('/profile', auth, async (req, res) => {
 router.put('/profile', auth, async (req, res) => {
   try {
     const user = await User.findByIdAndUpdate(
-      req.userId,
+      req.user.userId,
       req.body,
       { new: true }
     ).select('-password');
@@ -30,7 +30,7 @@ router.put('/profile', auth, async (req, res) => {
 // Premium durumu getir
 router.get('/premium', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select('isPremium');
+    const user = await User.findById(req.user.userId).select('isPremium');
     res.json({ isPremium: user.isPremium });
   } catch (error) {
     res.status(500).json({ message: 'Sunucu hatası' });

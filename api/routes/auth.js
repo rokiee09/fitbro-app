@@ -2,6 +2,8 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+
+const JWT_SECRET = 'fitbro_secret_key_2024';
 const router = express.Router();
 
 // Kullanıcı Kayıt
@@ -32,7 +34,7 @@ router.post('/register', async (req, res) => {
     // JWT token oluştur
     const token = jwt.sign(
       { userId: user._id },
-      process.env.JWT_SECRET || 'your-secret-key',
+      JWT_SECRET,
       { expiresIn: '7d' }
     );
 
@@ -70,7 +72,7 @@ router.post('/login', async (req, res) => {
     // JWT token oluştur
     const token = jwt.sign(
       { userId: user._id },
-      process.env.JWT_SECRET || 'your-secret-key',
+      JWT_SECRET,
       { expiresIn: '7d' }
     );
 

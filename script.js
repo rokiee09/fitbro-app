@@ -40,10 +40,10 @@ async function registerUser(username, email, password) {
   });
 }
 
-async function loginUser(username, password) {
+async function loginUser(email, password) {
   return await apiRequest('/auth/login', {
     method: 'POST',
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ email, password })
   });
 }
 
@@ -140,11 +140,11 @@ async function handleRegister(e) {
 async function handleLogin(e) {
   e.preventDefault();
   
-  const username = document.getElementById('loginUsername').value.trim();
+  const email = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value;
   
   try {
-    const response = await loginUser(username, password);
+    const response = await loginUser(email, password);
     localStorage.setItem('authToken', response.token);
     localStorage.setItem('currentUser', JSON.stringify(response.user));
     
