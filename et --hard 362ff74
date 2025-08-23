@@ -1,0 +1,10 @@
+[33m692e060[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m Add CSS test - inline styles and test div
+[33mac0f91e[m Add debug logging for DOM elements
+[33mcac306d[m Fix vercel.json - add frontend build configuration
+[33m6143bed[m Fix API base URL to correct backend
+[33md176dbc[m Fix import/export syntax and auth middleware
+[33m362ff74[m Convert backend to CommonJS for Vercel compatibility
+[33m62bd8ca[m Update API URL to match new Vercel domain
+[33mf3006c5[m Add vercel.json to properly deploy backend API
+[33m7f91d31[m Trigger Vercel deployment with environment variables
+[33mf84b9da[m Add test route to debug API issues
